@@ -1,0 +1,3229 @@
+Private Sub ListBox1_Click()
+
+End Sub
+
+Private Sub Calendar1_Click()
+
+End Sub
+
+Private Sub CommandButton1_Click()
+ If ActiveSheet.Name = "Menu" Then
+
+Else
+x = Range("as47")
+startm = DateSerial(Year(Range("a1")), Month(Range("a1")), 1)  'begining date of calendar
+endm = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 1)
+startofc = DateSerial(Year(Range("a1")), Month(Range("a1")), -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+
+For c = 2 To totaldays + 2
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 15)
+middleofmonth2 = DateSerial(Year(Range("a1")), Month(Range("a1")), 16)
+
+Set curcell = Cells(32, c)
+If Format(curcell, "d") = Val(x) And Format(curcell, "mmm") = Format(Range("bq32"), "mmm") Then moven = curcell.Column
+Next c
+
+If Range("as47") Like "a" Then  ' this puts in days off
+  For check = 2 To totaldays + 2
+  For rwcheck = 41 To 45
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(32, check), "DDD") Like Range("bd" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("be" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+Else
+ For check = moven To totaldays + 2   ' this puts in days off
+ For rwcheck = 41 To 45
+ Set curcell = Cells(rwcheck, check)
+ If Cells(rwcheck, check) = "x" Or Cells(rwcheck, check) = "X" Then Cells(rwcheck, check) = ""
+ If Format(Cells(32, check), "DDD") Like Range("bd" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("be" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+ 
+End If
+
+UserReply = MsgBox("Do you want to keep changes", vbYesNo)
+If UserReply = vbNo Then
+Call cancelchangedays
+'UserReply = MsgBox("you chose yes... Do you wish to continue?", vbYesNo)
+ElseIf UserReply = vbYes Then
+ActiveSheet.Range("bd41") = ActiveSheet.Range("az41")
+ActiveSheet.Range("bd42") = ActiveSheet.Range("az42")
+ActiveSheet.Range("bd43") = ActiveSheet.Range("az43")
+ActiveSheet.Range("bd44") = ActiveSheet.Range("az44")
+ActiveSheet.Range("bd45") = ActiveSheet.Range("az45")
+ActiveSheet.Range("bd51") = ActiveSheet.Range("az51")
+ActiveSheet.Range("bd52") = ActiveSheet.Range("az52")
+ActiveSheet.Range("bd53") = ActiveSheet.Range("az53")
+ActiveSheet.Range("bd54") = ActiveSheet.Range("az54")
+ActiveSheet.Range("bd55") = ActiveSheet.Range("az55")
+ActiveSheet.Range("bd61") = ActiveSheet.Range("az61")
+ActiveSheet.Range("bd62") = ActiveSheet.Range("az62")
+ActiveSheet.Range("bd63") = ActiveSheet.Range("az63")
+ActiveSheet.Range("bd64") = ActiveSheet.Range("az64")
+ActiveSheet.Range("bd65") = ActiveSheet.Range("az65")
+
+ActiveSheet.Range("be41") = ActiveSheet.Range("ba41")
+ActiveSheet.Range("be42") = ActiveSheet.Range("ba42")
+ActiveSheet.Range("be43") = ActiveSheet.Range("ba43")
+ActiveSheet.Range("be44") = ActiveSheet.Range("ba44")
+ActiveSheet.Range("be45") = ActiveSheet.Range("ba45")
+ActiveSheet.Range("be51") = ActiveSheet.Range("ba51")
+ActiveSheet.Range("be52") = ActiveSheet.Range("ba52")
+ActiveSheet.Range("be53") = ActiveSheet.Range("ba53")
+ActiveSheet.Range("be54") = ActiveSheet.Range("ba54")
+ActiveSheet.Range("be55") = ActiveSheet.Range("ba55")
+ActiveSheet.Range("be61") = ActiveSheet.Range("ba61")
+ActiveSheet.Range("be62") = ActiveSheet.Range("ba62")
+ActiveSheet.Range("be63") = ActiveSheet.Range("ba63")
+ActiveSheet.Range("be64") = ActiveSheet.Range("ba64")
+ActiveSheet.Range("be65") = ActiveSheet.Range("ba65")
+
+ 
+ 
+Worksheets("menu").Range("az41") = ActiveSheet.Range("az41")
+Worksheets("menu").Range("az42") = ActiveSheet.Range("az42")
+Worksheets("menu").Range("az43") = ActiveSheet.Range("az43")
+Worksheets("menu").Range("az44") = ActiveSheet.Range("az44")
+Worksheets("menu").Range("az45") = ActiveSheet.Range("az45")
+Worksheets("menu").Range("az51") = ActiveSheet.Range("az51")
+Worksheets("menu").Range("az52") = ActiveSheet.Range("az52")
+Worksheets("menu").Range("az53") = ActiveSheet.Range("az53")
+Worksheets("menu").Range("az54") = ActiveSheet.Range("az54")
+Worksheets("menu").Range("az55") = ActiveSheet.Range("az55")
+Worksheets("menu").Range("az61") = ActiveSheet.Range("az61")
+Worksheets("menu").Range("az62") = ActiveSheet.Range("az62")
+Worksheets("menu").Range("az63") = ActiveSheet.Range("az63")
+Worksheets("menu").Range("az64") = ActiveSheet.Range("az64")
+Worksheets("menu").Range("az65") = ActiveSheet.Range("az65")
+
+Worksheets("menu").Range("ba41") = ActiveSheet.Range("ba41")
+Worksheets("menu").Range("ba42") = ActiveSheet.Range("ba42")
+Worksheets("menu").Range("ba43") = ActiveSheet.Range("ba43")
+Worksheets("menu").Range("ba44") = ActiveSheet.Range("ba44")
+Worksheets("menu").Range("ba45") = ActiveSheet.Range("ba45")
+Worksheets("menu").Range("ba51") = ActiveSheet.Range("ba51")
+Worksheets("menu").Range("ba52") = ActiveSheet.Range("ba52")
+Worksheets("menu").Range("ba53") = ActiveSheet.Range("ba53")
+Worksheets("menu").Range("ba54") = ActiveSheet.Range("ba54")
+Worksheets("menu").Range("ba55") = ActiveSheet.Range("ba55")
+Worksheets("menu").Range("ba61") = ActiveSheet.Range("ba61")
+Worksheets("menu").Range("ba62") = ActiveSheet.Range("ba62")
+Worksheets("menu").Range("ba63") = ActiveSheet.Range("ba63")
+Worksheets("menu").Range("ba64") = ActiveSheet.Range("ba64")
+Worksheets("menu").Range("ba65") = ActiveSheet.Range("ba65")
+
+ End If
+
+
+End If
+End Sub
+
+Sub cancelchangeswings()
+
+
+ActiveSheet.Range("az41") = ActiveSheet.Range("bd41")
+ ActiveSheet.Range("az42") = ActiveSheet.Range("bd42")
+ ActiveSheet.Range("az43") = ActiveSheet.Range("bd43")
+  ActiveSheet.Range("az44") = ActiveSheet.Range("bd44")
+ ActiveSheet.Range("az45") = ActiveSheet.Range("bd45")
+ActiveSheet.Range("az51") = ActiveSheet.Range("bd51")
+ActiveSheet.Range("az52") = ActiveSheet.Range("bd52")
+ActiveSheet.Range("az53") = ActiveSheet.Range("bd53")
+ActiveSheet.Range("az54") = ActiveSheet.Range("bd54")
+ActiveSheet.Range("az55") = ActiveSheet.Range("bd55")
+ActiveSheet.Range("az61") = ActiveSheet.Range("bd61")
+ActiveSheet.Range("az62") = ActiveSheet.Range("bd62")
+ActiveSheet.Range("az63") = ActiveSheet.Range("bd63")
+ActiveSheet.Range("az64") = ActiveSheet.Range("bd64")
+ ActiveSheet.Range("az65") = ActiveSheet.Range("bd65")
+
+ActiveSheet.Range("ba41") = ActiveSheet.Range("be41")
+ActiveSheet.Range("ba42") = ActiveSheet.Range("be42")
+ActiveSheet.Range("ba43") = ActiveSheet.Range("be43")
+ActiveSheet.Range("ba44") = ActiveSheet.Range("be44")
+ActiveSheet.Range("ba45") = ActiveSheet.Range("be45")
+ActiveSheet.Range("ba51") = ActiveSheet.Range("be51")
+ActiveSheet.Range("ba52") = ActiveSheet.Range("be52")
+ActiveSheet.Range("ba53") = ActiveSheet.Range("be53")
+ActiveSheet.Range("ba54") = ActiveSheet.Range("be54")
+ActiveSheet.Range("ba55") = ActiveSheet.Range("be55")
+ActiveSheet.Range("ba61") = ActiveSheet.Range("be61")
+ActiveSheet.Range("ba62") = ActiveSheet.Range("be62")
+ActiveSheet.Range("ba63") = ActiveSheet.Range("be63")
+ActiveSheet.Range("ba64") = ActiveSheet.Range("be64")
+ActiveSheet.Range("ba65") = ActiveSheet.Range("be65")
+x = Range("as47")
+startm = DateSerial(Year(Range("a1")), Month(Range("a1")), 1)  'begining date of calendar
+endm = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 1)
+startofc = DateSerial(Year(Range("a1")), Month(Range("a1")), -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+
+For c = 2 To totaldays + 2
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 15)
+middleofmonth2 = DateSerial(Year(Range("a1")), Month(Range("a1")), 16)
+
+Set curcell = Cells(32, c)
+If Format(curcell, "d") = Val(x) And Format(curcell, "mmm") = Format(Range("a1"), "mmm") Then moven = curcell.Column
+Next c
+
+If Range("as57") Like "a" Then
+  For check = 2 To totaldays + 2
+  For rwcheck = 51 To 55
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+Else
+ For check = moven To totaldays + 2
+ For rwcheck = 51 To 55
+ Set curcell = Cells(rwcheck, check)
+ If Cells(rwcheck, check) = "x" Or Cells(rwcheck, check) = "X" Then Cells(rwcheck, check) = ""
+ If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+ 
+
+
+End If
+End Sub
+Sub cancelchangegraves()
+ActiveSheet.Range("az41") = ActiveSheet.Range("bd41")
+ ActiveSheet.Range("az42") = ActiveSheet.Range("bd42")
+ ActiveSheet.Range("az43") = ActiveSheet.Range("bd43")
+  ActiveSheet.Range("az44") = ActiveSheet.Range("bd44")
+ ActiveSheet.Range("az45") = ActiveSheet.Range("bd45")
+ActiveSheet.Range("az51") = ActiveSheet.Range("bd51")
+ActiveSheet.Range("az52") = ActiveSheet.Range("bd52")
+ActiveSheet.Range("az53") = ActiveSheet.Range("bd53")
+ActiveSheet.Range("az54") = ActiveSheet.Range("bd54")
+ActiveSheet.Range("az55") = ActiveSheet.Range("bd55")
+ActiveSheet.Range("az61") = ActiveSheet.Range("bd61")
+ActiveSheet.Range("az62") = ActiveSheet.Range("bd62")
+ActiveSheet.Range("az63") = ActiveSheet.Range("bd63")
+ActiveSheet.Range("az64") = ActiveSheet.Range("bd64")
+ ActiveSheet.Range("az65") = ActiveSheet.Range("bd65")
+
+ActiveSheet.Range("ba41") = ActiveSheet.Range("be41")
+ActiveSheet.Range("ba42") = ActiveSheet.Range("be42")
+ActiveSheet.Range("ba43") = ActiveSheet.Range("be43")
+ActiveSheet.Range("ba44") = ActiveSheet.Range("be44")
+ActiveSheet.Range("ba45") = ActiveSheet.Range("be45")
+ActiveSheet.Range("ba51") = ActiveSheet.Range("be51")
+ActiveSheet.Range("ba52") = ActiveSheet.Range("be52")
+ActiveSheet.Range("ba53") = ActiveSheet.Range("be53")
+ActiveSheet.Range("ba54") = ActiveSheet.Range("be54")
+ActiveSheet.Range("ba55") = ActiveSheet.Range("be55")
+ActiveSheet.Range("ba61") = ActiveSheet.Range("be61")
+ActiveSheet.Range("ba62") = ActiveSheet.Range("be62")
+ActiveSheet.Range("ba63") = ActiveSheet.Range("be63")
+ActiveSheet.Range("ba64") = ActiveSheet.Range("be64")
+ActiveSheet.Range("ba65") = ActiveSheet.Range("be65")
+x = Range("as47")
+startm = DateSerial(Year(Range("a1")), Month(Range("a1")), 1)  'begining date of calendar
+endm = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 1)
+startofc = DateSerial(Year(Range("a1")), Month(Range("a1")), -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+
+For c = 2 To totaldays + 2
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 15)
+middleofmonth2 = DateSerial(Year(Range("a1")), Month(Range("a1")), 16)
+
+Set curcell = Cells(32, c)
+If Format(curcell, "d") = Val(x) And Format(curcell, "mmm") = Format(Range("a1"), "mmm") Then moven = curcell.Column
+Next c
+
+If Range("as67") Like "a" Then
+  For check = 2 To totaldays + 2
+  For rwcheck = 61 To 65
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+Else
+ For check = moven To totaldays + 2
+ For rwcheck = 61 To 65
+ Set curcell = Cells(rwcheck, check)
+ If Cells(rwcheck, check) = "x" Or Cells(rwcheck, check) = "X" Then Cells(rwcheck, check) = ""
+ If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+ 
+
+
+End If
+End Sub
+
+Sub cancelchangedays()
+
+ ActiveSheet.Range("az41") = ActiveSheet.Range("bd41")
+ ActiveSheet.Range("az42") = ActiveSheet.Range("bd42")
+ ActiveSheet.Range("az43") = ActiveSheet.Range("bd43")
+  ActiveSheet.Range("az44") = ActiveSheet.Range("bd44")
+ ActiveSheet.Range("az45") = ActiveSheet.Range("bd45")
+ActiveSheet.Range("az51") = ActiveSheet.Range("bd51")
+ActiveSheet.Range("az52") = ActiveSheet.Range("bd52")
+ActiveSheet.Range("az53") = ActiveSheet.Range("bd53")
+ActiveSheet.Range("az54") = ActiveSheet.Range("bd54")
+ActiveSheet.Range("az55") = ActiveSheet.Range("bd55")
+ActiveSheet.Range("az61") = ActiveSheet.Range("bd61")
+ActiveSheet.Range("az62") = ActiveSheet.Range("bd62")
+ActiveSheet.Range("az63") = ActiveSheet.Range("bd63")
+ActiveSheet.Range("az64") = ActiveSheet.Range("bd64")
+ ActiveSheet.Range("az65") = ActiveSheet.Range("bd65")
+
+ActiveSheet.Range("ba41") = ActiveSheet.Range("be41")
+ActiveSheet.Range("ba42") = ActiveSheet.Range("be42")
+ActiveSheet.Range("ba43") = ActiveSheet.Range("be43")
+ActiveSheet.Range("ba44") = ActiveSheet.Range("be44")
+ActiveSheet.Range("ba45") = ActiveSheet.Range("be45")
+ActiveSheet.Range("ba51") = ActiveSheet.Range("be51")
+ActiveSheet.Range("ba52") = ActiveSheet.Range("be52")
+ActiveSheet.Range("ba53") = ActiveSheet.Range("be53")
+ActiveSheet.Range("ba54") = ActiveSheet.Range("be54")
+ActiveSheet.Range("ba55") = ActiveSheet.Range("be55")
+ActiveSheet.Range("ba61") = ActiveSheet.Range("be61")
+ActiveSheet.Range("ba62") = ActiveSheet.Range("be62")
+ActiveSheet.Range("ba63") = ActiveSheet.Range("be63")
+ActiveSheet.Range("ba64") = ActiveSheet.Range("be64")
+ActiveSheet.Range("ba65") = ActiveSheet.Range("be65")
+x = Range("as47")
+startm = DateSerial(Year(Range("a1")), Month(Range("a1")), 1)  'begining date of calendar
+endm = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 1)
+startofc = DateSerial(Year(Range("a1")), Month(Range("a1")), -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+
+For c = 2 To totaldays + 2
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 15)
+middleofmonth2 = DateSerial(Year(Range("a1")), Month(Range("a1")), 16)
+
+Set curcell = Cells(32, c)
+If Format(curcell, "d") = Val(x) And Format(curcell, "mmm") = Format(Range("bq32"), "mmm") Then moven = curcell.Column
+Next c
+
+If Range("as47") Like "a" Then
+  For check = 2 To totaldays + 2
+  For rwcheck = 41 To 45
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+Else
+ For check = moven To totaldays + 2
+ For rwcheck = 41 To 45
+ Set curcell = Cells(rwcheck, check)
+ If Cells(rwcheck, check) = "x" Or Cells(rwcheck, check) = "X" Then Cells(rwcheck, check) = ""
+ If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+ 
+End If
+
+
+
+End Sub
+
+Private Sub CommandButton10_Click()
+If Range("B26").Value Like "X" Then Range("b26") = ""
+If Range("c26").Value Like "X" Then Range("c26") = ""
+If Range("d26").Value Like "X" Then Range("d26") = ""
+If Range("e26").Value Like "X" Then Range("e26") = ""
+If Range("f26").Value Like "X" Then Range("f26") = ""
+If Range("g26").Value Like "X" Then Range("g26") = ""
+If Range("h26").Value Like "X" Then Range("h26") = ""
+If Range("i26").Value Like "X" Then Range("i26") = ""
+If Range("j26").Value Like "X" Then Range("j26") = ""
+If Range("k26").Value Like "X" Then Range("k26") = ""
+If Range("l26").Value Like "X" Then Range("l26") = ""
+If Range("m26").Value Like "X" Then Range("m26") = ""
+If Range("n26").Value Like "X" Then Range("n26") = ""
+If Range("o26").Value Like "X" Then Range("o26") = ""
+If Range("p26").Value Like "X" Then Range("p26") = ""
+If Range("q26").Value Like "X" Then Range("q26") = ""
+If Range("r26").Value Like "X" Then Range("r26") = ""
+If Range("s26").Value Like "X" Then Range("s26") = ""
+If Range("t26").Value Like "X" Then Range("t26") = ""
+If Range("u26").Value Like "X" Then Range("u26") = ""
+If Range("v26").Value Like "X" Then Range("v26") = ""
+If Range("w26").Value Like "X" Then Range("w26") = ""
+If Range("x26").Value Like "X" Then Range("x26") = ""
+If Range("y26").Value Like "X" Then Range("y26") = ""
+If Range("z26").Value Like "X" Then Range("z26") = ""
+If Range("aa26").Value Like "X" Then Range("aa26") = ""
+If Range("ab26").Value Like "X" Then Range("ab26") = ""
+If Range("ac26").Value Like "X" Then Range("ac26") = ""
+If Range("ad26").Value Like "X" Then Range("ad26") = ""
+If Range("ae26").Value Like "X" Then Range("ae26") = ""
+If Range("af26").Value Like "X" Then Range("af26") = ""
+If Range("ag26").Value Like "X" Then Range("ag26") = ""
+If Range("ah26").Value Like "X" Then Range("ah26") = ""
+If Range("ai26").Value Like "X" Then Range("ai26") = ""
+
+
+If Format(Range("B20"), "DDD") Like Range("aj26") Or Format(Range("B20"), "DDD") Like Range("Ak26") Then Range("B26").Value = "X" 'Else Range("B26").Value = ""
+If Format(Range("C20"), "DDD") Like Range("aj26") Or Format(Range("C20"), "DDD") Like Range("Ak26") Then Range("C26") = "X" 'Else Range("C26") = ""
+If Format(Range("D20"), "DDD") Like Range("aj26") Or Format(Range("D20"), "DDD") Like Range("Ak26") Then Range("D26") = "X" 'Else Range("D26") = ""
+If Format(Range("E20"), "DDD") Like Range("aj26") Or Format(Range("E20"), "DDD") Like Range("Ak26") Then Range("E26") = "X" 'Else Range("E26") = ""
+If Format(Range("F20"), "DDD") Like Range("aj26") Or Format(Range("F20"), "DDD") Like Range("Ak26") Then Range("F26") = "X" 'Else Range("F26") = ""
+If Format(Range("G20"), "DDD") Like Range("aj26") Or Format(Range("G20"), "DDD") Like Range("Ak26") Then Range("G26") = "X" 'Else Range("G26") = ""
+If Format(Range("H20"), "DDD") Like Range("aj26") Or Format(Range("H20"), "DDD") Like Range("Ak26") Then Range("H26") = "X" 'Else Range("H26") = ""
+If Format(Range("I20"), "DDD") Like Range("aj26") Or Format(Range("I20"), "DDD") Like Range("Ak26") Then Range("I26") = "X" 'Else Range("I26") = ""
+If Format(Range("J20"), "DDD") Like Range("aj26") Or Format(Range("J20"), "DDD") Like Range("Ak26") Then Range("J26") = "X" 'Else Range("J26") = ""
+If Format(Range("K20"), "DDD") Like Range("aj26") Or Format(Range("K20"), "DDD") Like Range("Ak26") Then Range("K26") = "X" 'Else Range("K26") = ""
+If Format(Range("L20"), "DDD") Like Range("aj26") Or Format(Range("L20"), "DDD") Like Range("Ak26") Then Range("L26") = "X" 'Else Range("L26") = ""
+If Format(Range("M20"), "DDD") Like Range("aj26") Or Format(Range("M20"), "DDD") Like Range("Ak26") Then Range("M26") = "X" 'Else Range("M26") = ""
+If Format(Range("N20"), "DDD") Like Range("aj26") Or Format(Range("N20"), "DDD") Like Range("Ak26") Then Range("N26") = "X" 'Else Range("N26") = ""
+If Format(Range("O20"), "DDD") Like Range("aj26") Or Format(Range("O20"), "DDD") Like Range("Ak26") Then Range("O26") = "X" 'Else Range("O26") = ""
+If Format(Range("P20"), "DDD") Like Range("aj26") Or Format(Range("P20"), "DDD") Like Range("Ak26") Then Range("P26") = "X" 'Else Range("P26") = ""
+If Format(Range("Q20"), "DDD") Like Range("aj26") Or Format(Range("Q20"), "DDD") Like Range("Ak26") Then Range("Q26") = "X" 'Else Range("Q26") = ""
+If Format(Range("R20"), "DDD") Like Range("aj26") Or Format(Range("R20"), "DDD") Like Range("Ak26") Then Range("R26") = "X" 'Else Range("R26") = ""
+If Format(Range("S20"), "DDD") Like Range("aj26") Or Format(Range("S20"), "DDD") Like Range("Ak26") Then Range("S26") = "X" 'Else Range("S26") = ""
+If Format(Range("T20"), "DDD") Like Range("aj26") Or Format(Range("T20"), "DDD") Like Range("Ak26") Then Range("T26") = "X" 'Else Range("T26") = ""
+If Format(Range("U20"), "DDD") Like Range("aj26") Or Format(Range("U20"), "DDD") Like Range("Ak26") Then Range("U26") = "X" 'Else Range("U26") = ""
+If Format(Range("V20"), "DDD") Like Range("aj26") Or Format(Range("V20"), "DDD") Like Range("Ak26") Then Range("V26") = "X" 'Else Range("V26") = ""
+If Format(Range("W20"), "DDD") Like Range("aj26") Or Format(Range("W20"), "DDD") Like Range("Ak26") Then Range("W26") = "X" 'Else Range("W26") = ""
+If Format(Range("X20"), "DDD") Like Range("aj26") Or Format(Range("X20"), "DDD") Like Range("Ak26") Then Range("X26") = "X" 'Else Range("X26") = ""
+If Format(Range("Y20"), "DDD") Like Range("aj26") Or Format(Range("Y20"), "DDD") Like Range("Ak26") Then Range("Y26") = "X" 'Else Range("Y26") = ""
+If Format(Range("Z20"), "DDD") Like Range("aj26") Or Format(Range("Z20"), "DDD") Like Range("Ak26") Then Range("Z26") = "X" 'Else Range("Z26") = ""
+If Format(Range("AA20"), "DDD") Like Range("aj26") Or Format(Range("AA20"), "DDD") Like Range("Ak26") Then Range("AA26") = "X" 'Else Range("AA26") = ""
+If Format(Range("AB20"), "DDD") Like Range("aj26") Or Format(Range("AB20"), "DDD") Like Range("Ak26") Then Range("AB26") = "X" 'Else Range("AB26") = ""
+If Format(Range("AC20"), "DDD") Like Range("aj26") Or Format(Range("AC20"), "DDD") Like Range("Ak26") Then Range("AC26") = "X" 'Else Range("AC26") = ""
+If Format(Range("AD20"), "DDD") Like Range("aj26") Or Format(Range("AD20"), "DDD") Like Range("Ak26") Then Range("AD26") = "X" 'Else Range("AD26") = ""
+If Format(Range("AE20"), "DDD") Like Range("aj26") Or Format(Range("AE20"), "DDD") Like Range("Ak26") Then Range("AE26") = "X" 'Else Range("AE26") = ""
+If Format(Range("AF20"), "DDD") Like Range("aj26") Or Format(Range("AF20"), "DDD") Like Range("Ak26") Then Range("AF26") = "X" 'Else Range("AF26") = ""
+If Format(Range("AG20"), "DDD") Like Range("aj26") Or Format(Range("AG20"), "DDD") Like Range("Ak26") Then Range("AG26") = "X" 'Else Range("AG26") = ""
+If Format(Range("AH20"), "DDD") Like Range("aj26") Or Format(Range("AH20"), "DDD") Like Range("Ak26") Then Range("AH26") = "X" 'Else Range("AH26") = ""
+If Format(Range("AI20"), "DDD") Like Range("aj26") Or Format(Range("AI20"), "DDD") Like Range("Ak26") Then Range("AI26") = "X" 'Else Range("AI26") = ""
+
+End Sub
+
+
+
+Private Sub CommandButton12_Click()
+ If ActiveSheet.Name = "Menu" Then
+
+Else
+x = Range("as47")
+startm = DateSerial(Year(Range("a1")), Month(Range("a1")), 1)  'begining date of calendar
+endm = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 1)
+startofc = DateSerial(Year(Range("a1")), Month(Range("a1")), -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+
+For c = 2 To totaldays + 2
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 15)
+middleofmonth2 = DateSerial(Year(Range("a1")), Month(Range("a1")), 16)
+
+Set curcell = Cells(32, c)
+If Format(curcell, "d") = Val(x) And Format(curcell, "mmm") = Format(Range("a1"), "mmm") Then moven = curcell.Column
+Next c
+
+If Range("as57") Like "a" Then
+  For check = 2 To totaldays + 2
+  For rwcheck = 51 To 55
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+Else
+ For check = moven To totaldays + 2
+ For rwcheck = 51 To 55
+ Set curcell = Cells(rwcheck, check)
+ If Cells(rwcheck, check) = "x" Or Cells(rwcheck, check) = "X" Then Cells(rwcheck, check) = ""
+ If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+ 
+
+
+End If
+
+   
+  UserReply = MsgBox("Do you want to keep changes", vbYesNo)
+If UserReply = vbNo Then
+Call cancelchangeswings
+'UserReply = MsgBox("you chose yes... Do you wish to continue?", vbYesNo)
+ElseIf UserReply = vbYes Then
+ActiveSheet.Range("bd41") = ActiveSheet.Range("az41")
+ActiveSheet.Range("bd42") = ActiveSheet.Range("az42")
+ActiveSheet.Range("bd43") = ActiveSheet.Range("az43")
+ActiveSheet.Range("bd44") = ActiveSheet.Range("az44")
+ActiveSheet.Range("bd45") = ActiveSheet.Range("az45")
+ActiveSheet.Range("bd51") = ActiveSheet.Range("az51")
+ActiveSheet.Range("bd52") = ActiveSheet.Range("az52")
+ActiveSheet.Range("bd53") = ActiveSheet.Range("az53")
+ActiveSheet.Range("bd54") = ActiveSheet.Range("az54")
+ActiveSheet.Range("bd55") = ActiveSheet.Range("az55")
+ActiveSheet.Range("bd61") = ActiveSheet.Range("az61")
+ActiveSheet.Range("bd62") = ActiveSheet.Range("az62")
+ActiveSheet.Range("bd63") = ActiveSheet.Range("az63")
+ActiveSheet.Range("bd64") = ActiveSheet.Range("az64")
+ActiveSheet.Range("bd65") = ActiveSheet.Range("az65")
+
+ActiveSheet.Range("be41") = ActiveSheet.Range("ba41")
+ActiveSheet.Range("be42") = ActiveSheet.Range("ba42")
+ActiveSheet.Range("be43") = ActiveSheet.Range("ba43")
+ActiveSheet.Range("be44") = ActiveSheet.Range("ba44")
+ActiveSheet.Range("be45") = ActiveSheet.Range("ba45")
+ActiveSheet.Range("be51") = ActiveSheet.Range("ba51")
+ActiveSheet.Range("be52") = ActiveSheet.Range("ba52")
+ActiveSheet.Range("be53") = ActiveSheet.Range("ba53")
+ActiveSheet.Range("be54") = ActiveSheet.Range("ba54")
+ActiveSheet.Range("be55") = ActiveSheet.Range("ba55")
+ActiveSheet.Range("be61") = ActiveSheet.Range("ba61")
+ActiveSheet.Range("be62") = ActiveSheet.Range("ba62")
+ActiveSheet.Range("be63") = ActiveSheet.Range("ba63")
+ActiveSheet.Range("be64") = ActiveSheet.Range("ba64")
+ActiveSheet.Range("be65") = ActiveSheet.Range("ba65")
+
+ 
+ 
+Worksheets("menu").Range("az41") = ActiveSheet.Range("az41")
+Worksheets("menu").Range("az42") = ActiveSheet.Range("az42")
+Worksheets("menu").Range("az43") = ActiveSheet.Range("az43")
+Worksheets("menu").Range("az44") = ActiveSheet.Range("az44")
+Worksheets("menu").Range("az45") = ActiveSheet.Range("az45")
+Worksheets("menu").Range("az51") = ActiveSheet.Range("az51")
+Worksheets("menu").Range("az52") = ActiveSheet.Range("az52")
+Worksheets("menu").Range("az53") = ActiveSheet.Range("az53")
+Worksheets("menu").Range("az54") = ActiveSheet.Range("az54")
+Worksheets("menu").Range("az55") = ActiveSheet.Range("az55")
+Worksheets("menu").Range("az61") = ActiveSheet.Range("az61")
+Worksheets("menu").Range("az62") = ActiveSheet.Range("az62")
+Worksheets("menu").Range("az63") = ActiveSheet.Range("az63")
+Worksheets("menu").Range("az64") = ActiveSheet.Range("az64")
+Worksheets("menu").Range("az65") = ActiveSheet.Range("az65")
+
+Worksheets("menu").Range("ba41") = ActiveSheet.Range("ba41")
+Worksheets("menu").Range("ba42") = ActiveSheet.Range("ba42")
+Worksheets("menu").Range("ba43") = ActiveSheet.Range("ba43")
+Worksheets("menu").Range("ba44") = ActiveSheet.Range("ba44")
+Worksheets("menu").Range("ba45") = ActiveSheet.Range("ba45")
+Worksheets("menu").Range("ba51") = ActiveSheet.Range("ba51")
+Worksheets("menu").Range("ba52") = ActiveSheet.Range("ba52")
+Worksheets("menu").Range("ba53") = ActiveSheet.Range("ba53")
+Worksheets("menu").Range("ba54") = ActiveSheet.Range("ba54")
+Worksheets("menu").Range("ba55") = ActiveSheet.Range("ba55")
+Worksheets("menu").Range("ba61") = ActiveSheet.Range("ba61")
+Worksheets("menu").Range("ba62") = ActiveSheet.Range("ba62")
+Worksheets("menu").Range("ba63") = ActiveSheet.Range("ba63")
+Worksheets("menu").Range("ba64") = ActiveSheet.Range("ba64")
+Worksheets("menu").Range("ba65") = ActiveSheet.Range("ba65")
+
+ End If
+
+
+
+
+
+
+
+
+
+
+End If
+End Sub
+
+
+
+
+
+
+
+
+
+Private Sub CommandButton2_Click()
+ If ActiveSheet.Name = "Menu" Then
+
+Else
+x = Range("as47")
+startm = DateSerial(Year(Range("a1")), Month(Range("a1")), 1)  'begining date of calendar
+endm = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 1)
+startofc = DateSerial(Year(Range("a1")), Month(Range("a1")), -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+
+For c = 2 To totaldays + 2
+FindBEginOFmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 1) 'current month firstdate
+FindEndofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")) + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(Year(Range("a1")), Month(Range("a1")), 15)
+middleofmonth2 = DateSerial(Year(Range("a1")), Month(Range("a1")), 16)
+
+Set curcell = Cells(32, c)
+If Format(curcell, "d") = Val(x) And Format(curcell, "mmm") = Format(Range("a1"), "mmm") Then moven = curcell.Column
+Next c
+
+If Range("as67") Like "a" Then
+  For check = 2 To totaldays + 2
+  For rwcheck = 61 To 65
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+Else
+ For check = moven To totaldays + 2
+ For rwcheck = 61 To 65
+ Set curcell = Cells(rwcheck, check)
+ If Cells(rwcheck, check) = "x" Or Cells(rwcheck, check) = "X" Then Cells(rwcheck, check) = ""
+ If Format(Cells(32, check), "DDD") Like Range("Az" & rwcheck) Or Format(Cells(32, check), "DDD") Like Range("ba" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+ 
+
+
+End If
+
+
+UserReply = MsgBox("Do you want to keep changes", vbYesNo)
+If UserReply = vbNo Then
+Call cancelchangegraves
+'UserReply = MsgBox("you chose yes... Do you wish to continue?", vbYesNo)
+ElseIf UserReply = vbYes Then
+ActiveSheet.Range("bd41") = ActiveSheet.Range("az41")
+ActiveSheet.Range("bd42") = ActiveSheet.Range("az42")
+ActiveSheet.Range("bd43") = ActiveSheet.Range("az43")
+ActiveSheet.Range("bd44") = ActiveSheet.Range("az44")
+ActiveSheet.Range("bd45") = ActiveSheet.Range("az45")
+ActiveSheet.Range("bd51") = ActiveSheet.Range("az51")
+ActiveSheet.Range("bd52") = ActiveSheet.Range("az52")
+ActiveSheet.Range("bd53") = ActiveSheet.Range("az53")
+ActiveSheet.Range("bd54") = ActiveSheet.Range("az54")
+ActiveSheet.Range("bd55") = ActiveSheet.Range("az55")
+ActiveSheet.Range("bd61") = ActiveSheet.Range("az61")
+ActiveSheet.Range("bd62") = ActiveSheet.Range("az62")
+ActiveSheet.Range("bd63") = ActiveSheet.Range("az63")
+ActiveSheet.Range("bd64") = ActiveSheet.Range("az64")
+ActiveSheet.Range("bd65") = ActiveSheet.Range("az65")
+
+ActiveSheet.Range("be41") = ActiveSheet.Range("ba41")
+ActiveSheet.Range("be42") = ActiveSheet.Range("ba42")
+ActiveSheet.Range("be43") = ActiveSheet.Range("ba43")
+ActiveSheet.Range("be44") = ActiveSheet.Range("ba44")
+ActiveSheet.Range("be45") = ActiveSheet.Range("ba45")
+ActiveSheet.Range("be51") = ActiveSheet.Range("ba51")
+ActiveSheet.Range("be52") = ActiveSheet.Range("ba52")
+ActiveSheet.Range("be53") = ActiveSheet.Range("ba53")
+ActiveSheet.Range("be54") = ActiveSheet.Range("ba54")
+ActiveSheet.Range("be55") = ActiveSheet.Range("ba55")
+ActiveSheet.Range("be61") = ActiveSheet.Range("ba61")
+ActiveSheet.Range("be62") = ActiveSheet.Range("ba62")
+ActiveSheet.Range("be63") = ActiveSheet.Range("ba63")
+ActiveSheet.Range("be64") = ActiveSheet.Range("ba64")
+ActiveSheet.Range("be65") = ActiveSheet.Range("ba65")
+
+ 
+ 
+Worksheets("menu").Range("az41") = ActiveSheet.Range("az41")
+Worksheets("menu").Range("az42") = ActiveSheet.Range("az42")
+Worksheets("menu").Range("az43") = ActiveSheet.Range("az43")
+Worksheets("menu").Range("az44") = ActiveSheet.Range("az44")
+Worksheets("menu").Range("az45") = ActiveSheet.Range("az45")
+Worksheets("menu").Range("az51") = ActiveSheet.Range("az51")
+Worksheets("menu").Range("az52") = ActiveSheet.Range("az52")
+Worksheets("menu").Range("az53") = ActiveSheet.Range("az53")
+Worksheets("menu").Range("az54") = ActiveSheet.Range("az54")
+Worksheets("menu").Range("az55") = ActiveSheet.Range("az55")
+Worksheets("menu").Range("az61") = ActiveSheet.Range("az61")
+Worksheets("menu").Range("az62") = ActiveSheet.Range("az62")
+Worksheets("menu").Range("az63") = ActiveSheet.Range("az63")
+Worksheets("menu").Range("az64") = ActiveSheet.Range("az64")
+Worksheets("menu").Range("az65") = ActiveSheet.Range("az65")
+
+Worksheets("menu").Range("ba41") = ActiveSheet.Range("ba41")
+Worksheets("menu").Range("ba42") = ActiveSheet.Range("ba42")
+Worksheets("menu").Range("ba43") = ActiveSheet.Range("ba43")
+Worksheets("menu").Range("ba44") = ActiveSheet.Range("ba44")
+Worksheets("menu").Range("ba45") = ActiveSheet.Range("ba45")
+Worksheets("menu").Range("ba51") = ActiveSheet.Range("ba51")
+Worksheets("menu").Range("ba52") = ActiveSheet.Range("ba52")
+Worksheets("menu").Range("ba53") = ActiveSheet.Range("ba53")
+Worksheets("menu").Range("ba54") = ActiveSheet.Range("ba54")
+Worksheets("menu").Range("ba55") = ActiveSheet.Range("ba55")
+Worksheets("menu").Range("ba61") = ActiveSheet.Range("ba61")
+Worksheets("menu").Range("ba62") = ActiveSheet.Range("ba62")
+Worksheets("menu").Range("ba63") = ActiveSheet.Range("ba63")
+Worksheets("menu").Range("ba64") = ActiveSheet.Range("ba64")
+Worksheets("menu").Range("ba65") = ActiveSheet.Range("ba65")
+
+ End If
+
+
+
+
+
+
+End If
+
+End Sub
+
+
+
+Private Sub CommandButton25_Click()
+'to see day shit
+Application.ScreenUpdating = False
+ActiveSheet.Rows("20:24").EntireRow.Hidden = False 'day shift
+ActiveSheet.Rows("26:30").EntireRow.Hidden = True 'swing shift
+ActiveSheet.Rows("33:37").EntireRow.Hidden = True 'Grave Shift
+ActiveSheet.CommandButton1.Visible = True 'days
+'ActiveSheet.CommandButton1.Top = Range("bc47")
+ActiveSheet.CommandButton12.Visible = False 'swings
+ActiveSheet.CommandButton2.Visible = False 'graves
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub CommandButton26_Click()
+'to see swing shit
+Application.ScreenUpdating = False
+ActiveSheet.Rows("20:25").EntireRow.Hidden = True 'day shift
+ActiveSheet.Rows("26:30").EntireRow.Hidden = False 'swing shift
+ActiveSheet.Rows("33:37").EntireRow.Hidden = True 'Grave Shift
+ActiveSheet.CommandButton1.Visible = False 'days
+ActiveSheet.CommandButton12.Visible = True 'swings
+'ActiveSheet.CommandButton12.Top = Range("bc47")
+ActiveSheet.CommandButton2.Visible = False 'graves
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub CommandButton27_Click()
+'to see grave shit
+
+Application.ScreenUpdating = False
+ActiveSheet.Rows("20:25").EntireRow.Hidden = True 'day shift
+ActiveSheet.Rows("26:32").EntireRow.Hidden = True 'swing shift
+ActiveSheet.Rows("33:37").EntireRow.Hidden = False 'Grave Shift
+ActiveSheet.CommandButton1.Visible = False 'days
+ActiveSheet.CommandButton12.Visible = False 'swings
+ActiveSheet.CommandButton2.Visible = True 'graves
+'ActiveSheet.CommandButton2.Top = Range("bc47")
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub CommandButton28_Click()
+'to see all shit
+Application.ScreenUpdating = False
+ActiveSheet.Rows("20:25").EntireRow.Hidden = False 'day shift
+ActiveSheet.Rows("26:32").EntireRow.Hidden = False 'swing shift
+ActiveSheet.Rows("33:37").EntireRow.Hidden = False 'Grave Shift
+ActiveSheet.CommandButton1.Visible = True 'days
+ActiveSheet.CommandButton1.Top = Range("bc47")
+ActiveSheet.CommandButton12.Visible = True 'swings
+ActiveSheet.CommandButton12.Top = Range("bc57")
+ActiveSheet.CommandButton2.Visible = True 'graves
+'A'ctiveSheet.CommandButton2.Top = Range("bc67")
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub CommandButton3_Click()
+If Range("B10").Value Like "X" Then Range("b10") = ""
+If Range("c10").Value Like "X" Then Range("c10") = ""
+If Range("d10").Value Like "X" Then Range("d10") = ""
+If Range("e10").Value Like "X" Then Range("e10") = ""
+If Range("f10").Value Like "X" Then Range("f10") = ""
+If Range("g10").Value Like "X" Then Range("g10") = ""
+If Range("h10").Value Like "X" Then Range("h10") = ""
+If Range("i10").Value Like "X" Then Range("i10") = ""
+If Range("j10").Value Like "X" Then Range("j10") = ""
+If Range("k10").Value Like "X" Then Range("k10") = ""
+If Range("l10").Value Like "X" Then Range("l10") = ""
+If Range("m10").Value Like "X" Then Range("m10") = ""
+If Range("n10").Value Like "X" Then Range("n10") = ""
+If Range("o10").Value Like "X" Then Range("o10") = ""
+If Range("p10").Value Like "X" Then Range("p10") = ""
+If Range("q10").Value Like "X" Then Range("q10") = ""
+If Range("r10").Value Like "X" Then Range("r10") = ""
+If Range("s10").Value Like "X" Then Range("s10") = ""
+If Range("t10").Value Like "X" Then Range("t10") = ""
+If Range("u10").Value Like "X" Then Range("u10") = ""
+If Range("v10").Value Like "X" Then Range("v10") = ""
+If Range("w10").Value Like "X" Then Range("w10") = ""
+If Range("x10").Value Like "X" Then Range("x10") = ""
+If Range("y10").Value Like "X" Then Range("y10") = ""
+If Range("z10").Value Like "X" Then Range("z10") = ""
+If Range("aa10").Value Like "X" Then Range("aa10") = ""
+If Range("ab10").Value Like "X" Then Range("ab10") = ""
+If Range("ac10").Value Like "X" Then Range("ac10") = ""
+If Range("ad10").Value Like "X" Then Range("ad10") = ""
+If Range("ae10").Value Like "X" Then Range("ae10") = ""
+If Range("af10").Value Like "X" Then Range("af10") = ""
+If Range("ag10").Value Like "X" Then Range("ag10") = ""
+If Range("ah10").Value Like "X" Then Range("ah10") = ""
+If Range("ai10").Value Like "X" Then Range("ai10") = ""
+If Range("aj10").Value Like "X" Then Range("aj10") = ""
+If Range("ak10").Value Like "X" Then Range("ak10") = ""
+If Range("al10").Value Like "X" Then Range("al10") = ""
+If Range("am10").Value Like "X" Then Range("am10") = ""
+If Range("an10").Value Like "X" Then Range("an10") = ""
+If Range("ao10").Value Like "X" Then Range("ao10") = ""
+If Range("ap10").Value Like "X" Then Range("ap10") = ""
+If Range("aq10").Value Like "X" Then Range("aq10") = ""
+
+
+
+
+If Format(Range("B7"), "DDD") Like Range("Az10") Or Format(Range("B7"), "DDD") Like Range("bA10") Then Range("B10").Value = "X" 'Else Range("B10").Value = ""
+If Format(Range("C7"), "DDD") Like Range("Az10") Or Format(Range("C7"), "DDD") Like Range("bA10") Then Range("C10") = "X" 'Else Range("C10") = ""
+If Format(Range("D7"), "DDD") Like Range("Az10") Or Format(Range("D7"), "DDD") Like Range("bA10") Then Range("D10") = "X" 'Else Range("D10") = ""
+If Format(Range("E7"), "DDD") Like Range("Az10") Or Format(Range("E7"), "DDD") Like Range("bA10") Then Range("E10") = "X" 'Else Range("E10") = ""
+If Format(Range("F7"), "DDD") Like Range("Az10") Or Format(Range("F7"), "DDD") Like Range("bA10") Then Range("F10") = "X" 'Else Range("F10") = ""
+If Format(Range("G7"), "DDD") Like Range("Az10") Or Format(Range("G7"), "DDD") Like Range("bA10") Then Range("G10") = "X" 'Else Range("G10") = ""
+If Format(Range("H7"), "DDD") Like Range("Az10") Or Format(Range("H7"), "DDD") Like Range("bA10") Then Range("H10") = "X" 'Else Range("H10") = ""
+If Format(Range("I7"), "DDD") Like Range("Az10") Or Format(Range("I7"), "DDD") Like Range("bA10") Then Range("I10") = "X" 'Else Range("I10") = ""
+If Format(Range("J7"), "DDD") Like Range("Az10") Or Format(Range("J7"), "DDD") Like Range("bA10") Then Range("J10") = "X" 'Else Range("J10") = ""
+If Format(Range("K7"), "DDD") Like Range("Az10") Or Format(Range("K7"), "DDD") Like Range("bA10") Then Range("K10") = "X" 'Else Range("K10") = ""
+If Format(Range("L7"), "DDD") Like Range("Az10") Or Format(Range("L7"), "DDD") Like Range("bA10") Then Range("L10") = "X" 'Else Range("L10") = ""
+If Format(Range("M7"), "DDD") Like Range("Az10") Or Format(Range("M7"), "DDD") Like Range("bA10") Then Range("M10") = "X" 'Else Range("M10") = ""
+If Format(Range("N7"), "DDD") Like Range("Az10") Or Format(Range("N7"), "DDD") Like Range("bA10") Then Range("N10") = "X" 'Else Range("N10") = ""
+If Format(Range("O7"), "DDD") Like Range("Az10") Or Format(Range("O7"), "DDD") Like Range("bA10") Then Range("O10") = "X" 'Else Range("O10") = ""
+If Format(Range("P7"), "DDD") Like Range("Az10") Or Format(Range("P7"), "DDD") Like Range("bA10") Then Range("P10") = "X" 'Else Range("P10") = ""
+If Format(Range("Q7"), "DDD") Like Range("Az10") Or Format(Range("Q7"), "DDD") Like Range("bA10") Then Range("Q10") = "X" 'Else Range("Q10") = ""
+If Format(Range("R7"), "DDD") Like Range("Az10") Or Format(Range("R7"), "DDD") Like Range("bA10") Then Range("R10") = "X" 'Else Range("R10") = ""
+If Format(Range("S7"), "DDD") Like Range("Az10") Or Format(Range("S7"), "DDD") Like Range("bA10") Then Range("S10") = "X" 'Else Range("S10") = ""
+If Format(Range("T7"), "DDD") Like Range("Az10") Or Format(Range("T7"), "DDD") Like Range("bA10") Then Range("T10") = "X" 'Else Range("T10") = ""
+If Format(Range("U7"), "DDD") Like Range("Az10") Or Format(Range("U7"), "DDD") Like Range("bA10") Then Range("U10") = "X" 'Else Range("U10") = ""
+If Format(Range("V7"), "DDD") Like Range("Az10") Or Format(Range("V7"), "DDD") Like Range("bA10") Then Range("V10") = "X" 'Else Range("V10") = ""
+If Format(Range("W7"), "DDD") Like Range("Az10") Or Format(Range("W7"), "DDD") Like Range("bA10") Then Range("W10") = "X" 'Else Range("W10") = ""
+If Format(Range("X7"), "DDD") Like Range("Az10") Or Format(Range("X7"), "DDD") Like Range("bA10") Then Range("X10") = "X" 'Else Range("X10") = ""
+If Format(Range("Y7"), "DDD") Like Range("Az10") Or Format(Range("Y7"), "DDD") Like Range("bA10") Then Range("Y10") = "X" 'Else Range("Y10") = ""
+If Format(Range("Z7"), "DDD") Like Range("Az10") Or Format(Range("Z7"), "DDD") Like Range("bA10") Then Range("Z10") = "X" 'Else Range("Z10") = ""
+If Format(Range("AA7"), "DDD") Like Range("Az10") Or Format(Range("AA7"), "DDD") Like Range("bA10") Then Range("AA10") = "X" 'Else Range("AA10") = ""
+If Format(Range("AB7"), "DDD") Like Range("Az10") Or Format(Range("AB7"), "DDD") Like Range("bA10") Then Range("AB10") = "X" 'Else Range("AB10") = ""
+If Format(Range("AC7"), "DDD") Like Range("Az10") Or Format(Range("AC7"), "DDD") Like Range("bA10") Then Range("AC10") = "X" 'Else Range("AC10") = ""
+If Format(Range("AD7"), "DDD") Like Range("Az10") Or Format(Range("AD7"), "DDD") Like Range("bA10") Then Range("AD10") = "X" 'Else Range("AD10") = ""
+If Format(Range("AE7"), "DDD") Like Range("Az10") Or Format(Range("AE7"), "DDD") Like Range("bA10") Then Range("AE10") = "X" 'Else Range("AE10") = ""
+If Format(Range("AF7"), "DDD") Like Range("Az10") Or Format(Range("AF7"), "DDD") Like Range("bA10") Then Range("AF10") = "X" 'Else Range("AF10") = ""
+If Format(Range("AG7"), "DDD") Like Range("Az10") Or Format(Range("AG7"), "DDD") Like Range("bA10") Then Range("AG10") = "X" 'Else Range("AG10") = ""
+If Format(Range("AH7"), "DDD") Like Range("Az10") Or Format(Range("AH7"), "DDD") Like Range("bA10") Then Range("AH10") = "X" 'Else Range("AH10") = ""
+If Format(Range("AI7"), "DDD") Like Range("Az10") Or Format(Range("AI7"), "DDD") Like Range("bA10") Then Range("AI10") = "X" 'Else Range("AI10") = ""
+If Format(Range("Aj7"), "DDD") Like Range("Az10") Or Format(Range("Aj7"), "DDD") Like Range("bA10") Then Range("Aj10") = "X" 'Else Range("AI10") = ""
+If Format(Range("Ak7"), "DDD") Like Range("Az10") Or Format(Range("Ak7"), "DDD") Like Range("bA10") Then Range("Ak10") = "X" 'Else Range("AI10") = ""
+If Format(Range("Al7"), "DDD") Like Range("Az10") Or Format(Range("Al7"), "DDD") Like Range("bA10") Then Range("Al10") = "X" 'Else Range("AI10") = ""
+If Format(Range("Am7"), "DDD") Like Range("Az10") Or Format(Range("Am7"), "DDD") Like Range("bA10") Then Range("Am10") = "X" 'Else Range("AI10") = ""
+If Format(Range("An7"), "DDD") Like Range("Az10") Or Format(Range("An7"), "DDD") Like Range("bA10") Then Range("An0") = "X" 'Else Range("AI10") = ""
+If Format(Range("Ao7"), "DDD") Like Range("Az10") Or Format(Range("Ao7"), "DDD") Like Range("bA10") Then Range("Ao10") = "X" 'Else Range("AI10") = ""
+If Format(Range("Ap7"), "DDD") Like Range("Az10") Or Format(Range("Ap7"), "DDD") Like Range("bA10") Then Range("Ap10") = "X" 'Else Range("AI10") = ""
+If Format(Range("Aq7"), "DDD") Like Range("Az10") Or Format(Range("Aq7"), "DDD") Like Range("bA10") Then Range("Aq10") = "X" 'Else Range("AI10") = ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+End Sub
+Public Function NDow(y As Integer, M As Integer, _
+     N As Integer, DOW As Integer) As Date
+
+NDow = DateSerial(y, M, (8 - Weekday(DateSerial(y, M, 1), _
+  (DOW + 1) Mod 8)) + ((N - 1) * 7))
+
+End Function
+
+
+
+Public Function DOWsInMonth(Yr As Integer, M As Integer, _
+    DOW As Integer) As Integer
+
+On Error GoTo EndFunction
+
+Dim I As Integer
+Dim Lim As Integer
+Lim = Day(DateSerial(Yr, M + 1, 0))
+DOWsInMonth = 0
+For I = 1 To Lim
+    If Weekday(DateSerial(Yr, M, I)) = DOW Then
+        DOWsInMonth = DOWsInMonth + 1
+    End If
+Next I
+Exit Function
+EndFunction:
+DOWsInMonth = 0
+End Function
+
+
+
+
+
+
+
+
+
+
+Private Sub Label1_Click()
+
+End Sub
+
+Private Sub laststep_Click()
+
+
+Application.DisplayAlerts = False
+
+Dim answer
+Dim password
+answer = "Easi2912"
+password = Range("az2")
+If answer <> password Then
+UserReply = MsgBox(" Sorry Wrong Password...", vbOK)
+Range("az2") = ""
+GoTo finalend
+
+Else: End If
+Range("az2") = ""
+
+
+
+
+ActiveSheet.Rows("39:48").EntireRow.Hidden = False 'day shift
+ActiveSheet.Rows("48:58").EntireRow.Hidden = False 'swing shift
+ActiveSheet.Rows("58:68").EntireRow.Hidden = False 'Grave Shift
+ActiveSheet.CommandButton1.Visible = True 'days
+ActiveSheet.CommandButton12.Visible = True 'swings
+ActiveSheet.CommandButton2.Visible = True 'graves
+Range("ar8:as18").ClearContents
+Range("ar21:as23").ClearContents
+Range("ar27:as29").ClearContents
+Range("ar34:as36").ClearContents
+
+
+
+
+Dim monthh, check
+monthh = Format(Range("bq32"), "mmm-yy")
+check = WorksheetExists(monthh)
+If check = True Then GoTo endthis
+
+
+TextBox1.Text = "Making New Schedule Please Wait"
+TextBox1.Visible = True
+Application.ScreenUpdating = False
+fy = Range("aw1")
+fm = Range("au1")
+startm = DateSerial(fy, fm, 1)  'begining date of calendar
+endm = DateSerial(fy, fm + 1, 0) 'Last month lastdate
+'logde1 = DateSerial(Year(Range("a5")), Month(Range("a5")), 1) 'current month firstdate
+'logde2 = DateSerial(Year(Now), Month(Now), 31) 'current month lastdate
+'logdn1 = Format(DateAdd("m", 1, mydatt), "medium Date")
+'logdn2 = Format(NextMonth2 - DatePart("d", NextMonth2), "medium date")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'X = Range("a5")
+'If Format(Range("b7"), "ddd") Like "Thu" Then Range("b6") = "TH"
+'X = Format(Range("b7"), "ddd")
+FindBEginOFmonth = DateSerial(fy, fm, 1) 'current month firstdate
+FindEndofmonth = DateSerial(fy, fm + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(fy, fm + 1, 1)
+startofc = DateSerial(fy, fm, -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+'Range("b8:aq43").ClearContents
+'Range("b8:aq43").Interior.ColorIndex = 2
+
+
+
+For c = 2 To totaldays + 2
+
+Set curcell = Cells(7, c) 'Puts the dates in partimers line
+curcell.Value = startday + (c - 2)
+If Format(startm, "mmm") = Format(curcell.Value, "mmm") Then
+curcell.Interior.ColorIndex = 6
+Else
+curcell.Interior.ColorIndex = 15
+End If
+Set curcell = Cells(6, c)
+curcell.Value = Left(Format(Cells(7, c), "ddd"), 2)
+If curcell = "" Then
+curcell.Interior.ColorIndex = 2
+Else
+curcell.Interior.ColorIndex = 19
+End If
+
+
+
+
+
+FindBEginOFmonth = DateSerial(fy, fm, 1) 'current month firstdate
+FindEndofmonth = DateSerial(fy, fm + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(fy, fm, 15)
+middleofmonth2 = DateSerial(fy, fm, 16)
+Set curcell = Cells(7, c)
+If curcell = FindBEginOFmonth Then
+fromc = curcell.Column
+firstc = c
+End If
+If curcell = FindEndofmonth Then
+TOC = curcell.Column
+endc = c
+End If
+If curcell = middleofmonth Then
+middlec = curcell.Column
+midc = c
+End If
+If curcell = middleofmonth2 Then
+middlec2 = curcell.Column
+mid2c = c
+End If
+Next c
+
+
+
+
+
+
+'This evaluates the first and second week pays for fulltimers
+Select Case fromc    ' Evaluate Number.
+Case 1
+fromc = "a"
+Case 2
+fromc = "b"
+Case 3
+fromc = "c"
+Case 4
+fromc = "d"
+Case 5
+fromc = "e"
+Case 6
+fromc = "f"
+Case 7
+fromc = "g"
+Case 8
+fromc = "h"
+Case 9
+fromc = "i"
+Case 10
+fromc = "j"
+Case 11
+fromc = "k"
+Case 12
+fromc = "l"
+Case 13
+fromc = "m"
+Case 14
+fromc = "n"
+Case 15
+fromc = "o"
+Case 16
+fromc = "p"
+Case 17
+fromc = "q"
+Case 18
+fromc = "r"
+Case 19
+fromc = "s"
+Case 20
+fromc = "t"
+Case 21
+fromc = "u"
+Case 22
+fromc = "v"
+Case 23
+fromc = "w"
+Case 24
+fromc = "x"
+Case 25
+fromc = "y"
+Case 26
+fromc = "z"
+Case 27
+fromc = "aa"
+Case 28
+fromc = "ab"
+Case 29
+fromc = "ac"
+Case 30
+fromc = "ad"
+Case 31
+fromc = "ae"
+Case 32
+fromc = "af"
+Case 33
+fromc = "ag"
+Case 34
+fromc = "ah"
+Case 35
+fromc = "ai"
+Case 36
+fromc = "aj"
+Case 37
+fromc = "aka"
+Case 38
+fromc = "al"
+Case 39
+fromc = "am"
+Case 40
+fromc = "an"
+Case 41
+fromc = "ao"
+Case 42
+fromc = "ap"
+Case 43
+fromc = "aq"
+End Select
+
+Select Case TOC    ' Evaluate Number.
+Case 1
+TOC = "a"
+Case 2
+TOC = "b"
+Case 3
+TOC = "c"
+Case 4
+TOC = "d"
+Case 5
+TOC = "e"
+Case 6
+TOC = "f"
+Case 7
+TOC = "g"
+Case 8
+TOC = "h"
+Case 9
+TOC = "i"
+Case 10
+TOC = "j"
+Case 11
+TOC = "k"
+Case 12
+TOC = "l"
+Case 13
+TOC = "m"
+Case 14
+TOC = "n"
+Case 15
+TOC = "o"
+Case 16
+TOC = "p"
+Case 17
+TOC = "q"
+Case 18
+TOC = "r"
+Case 19
+TOC = "s"
+Case 20
+TOC = "t"
+Case 21
+TOC = "u"
+Case 22
+TOC = "v"
+Case 23
+TOC = "w"
+Case 24
+TOC = "x"
+Case 25
+TOC = "y"
+Case 26
+TOC = "z"
+Case 27
+TOC = "aa"
+Case 28
+TOC = "ab"
+Case 29
+TOC = "ac"
+Case 30
+TOC = "ad"
+Case 31
+TOC = "ae"
+Case 32
+TOC = "af"
+Case 33
+TOC = "ag"
+Case 34
+TOC = "ah"
+Case 35
+TOC = "ai"
+Case 36
+TOC = "aj"
+Case 37
+TOC = "ak"
+Case 38
+TOC = "al"
+Case 39
+TOC = "am"
+Case 40
+TOC = "an"
+Case 41
+TOC = "ao"
+Case 42
+TOC = "ap"
+Case 43
+TOC = "aq"
+End Select
+
+Select Case middlec    ' Evaluate Number.
+Case 1
+middlec = "a"
+Case 2
+middlec = "b"
+Case 3
+middlec = "c"
+Case 4
+middlec = "d"
+Case 5
+middlec = "e"
+Case 6
+middlec = "f"
+Case 7
+middlec = "g"
+Case 8
+middlec = "h"
+Case 9
+middlec = "i"
+Case 10
+middlec = "j"
+Case 11
+middlec = "k"
+Case 12
+middlec = "l"
+Case 13
+middlec = "m"
+Case 14
+middlec = "n"
+Case 15
+middlec = "o"
+Case 16
+middlec = "p"
+Case 17
+middlec = "q"
+Case 18
+middlec = "r"
+Case 19
+middlec = "s"
+Case 20
+middlec = "t"
+Case 21
+middlec = "u"
+Case 22
+middlec = "v"
+Case 23
+middlec = "w"
+Case 24
+middlec = "x"
+Case 25
+middlec = "y"
+Case 26
+middlec = "z"
+Case 27
+middlec = "aa"
+Case 28
+middlec = "ab"
+Case 29
+middlec = "ac"
+Case 30
+middlec = "ad"
+Case 31
+middlec = "ae"
+Case 32
+middlec = "af"
+Case 33
+middlec = "ag"
+Case 34
+middlec = "ah"
+Case 35
+middlec = "ai"
+Case 36
+middlec = "aj"
+Case 37
+middlec = "ak"
+Case 38
+middlec = "al"
+Case 39
+middlec = "am"
+Case 40
+middlec = "an"
+Case 41
+middlec = "ao"
+Case 42
+middlec = "ap"
+Case 43
+middlec = "aq"
+End Select
+
+Select Case middlec2    ' Evaluate Number.
+Case 1
+middlec2 = "a"
+Case 2
+middlec2 = "b"
+Case 3
+middlec2 = "c"
+Case 4
+middlec2 = "d"
+Case 5
+middlec2 = "e"
+Case 6
+middlec2 = "f"
+Case 7
+middlec2 = "g"
+Case 8
+middlec2 = "h"
+Case 9
+middlec2 = "i"
+Case 10
+middlec2 = "j"
+Case 11
+middlec2 = "k"
+Case 12
+middlec2 = "l"
+Case 13
+middlec2 = "m"
+Case 14
+middlec2 = "n"
+Case 15
+middlec2 = "o"
+Case 16
+middlec2 = "p"
+Case 17
+middlec2 = "q"
+Case 18
+middlec2 = "r"
+Case 19
+middlec2 = "s"
+Case 20
+middlec2 = "t"
+Case 21
+middlec2 = "u"
+Case 22
+middlec2 = "v"
+Case 23
+middlec2 = "w"
+Case 24
+middlec2 = "x"
+Case 25
+middlec2 = "y"
+Case 26
+middlec2 = "z"
+Case 27
+middlec2 = "aa"
+Case 28
+middlec2 = "ab"
+Case 29
+middlec2 = "ac"
+Case 30
+middlec2 = "ad"
+Case 31
+middlec2 = "ae"
+Case 32
+middlec2 = "af"
+Case 33
+middlec2 = "ag"
+Case 34
+middlec2 = "ah"
+Case 35
+middlec2 = "ai"
+Case 36
+middlec2 = "aj"
+Case 37
+middlec2 = "ak"
+Case 38
+middlec2 = "al"
+Case 39
+middlec2 = "am"
+Case 40
+middlec2 = "an"
+Case 41
+middlec2 = "ao"
+Case 42
+middlec2 = "ap"
+Case 43
+middlec2 = "aq"
+End Select
+
+For x = 21 To 21
+If Len(Range("a" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+Range("ar" & x) = "=(countblank(" & fromc & x & ":" & middlec & x & "))*7.5 + (sum(" & fromc & x & ":" & middlec & x & "))" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "H" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "V" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5)"
+Range("as" & x) = "=(countblank(" & middlec2 & x & ":" & TOC & x & "))*7.5 + (sum(" & middlec2 & x & ":" & TOC & x & "))" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "H" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "V" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5)"
+End If
+Next x
+
+
+For x = 22 To 23
+If Len(Range("a" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+Range("ar" & x) = "=(countblank(" & fromc & x & ":" & middlec & x & "))*8 + (sum(" & fromc & x & ":" & middlec & x & "))" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "H" & Chr(34) & ")*8)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "V" & Chr(34) & ")*8)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*8)"
+Range("as" & x) = "=(countblank(" & middlec2 & x & ":" & TOC & x & "))*8 + (sum(" & middlec2 & x & ":" & TOC & x & "))" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "H" & Chr(34) & ")*8)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "V" & Chr(34) & ")*8)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*8)"
+End If
+Next x
+
+
+
+
+
+
+For x = 27 To 29
+If Len(Range("a" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+Range("ar" & x) = "=(countblank(" & fromc & x & ":" & middlec & x & "))*7.5 + (sum(" & fromc & x & ":" & middlec & x & "))" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "H" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "V" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5)"
+Range("as" & x) = "=(countblank(" & middlec2 & x & ":" & TOC & x & "))*7.5 + (sum(" & middlec2 & x & ":" & TOC & x & "))" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "H" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "V" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5)"
+End If
+Next x
+
+For x = 34 To 36
+If Len(Range("a" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+Range("ar" & x) = "=(countblank(" & fromc & x & ":" & middlec & x & "))*7.5 + (sum(" & fromc & x & ":" & middlec & x & "))" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "H" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "V" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5)"
+Range("as" & x) = "=(countblank(" & middlec2 & x & ":" & TOC & x & "))*7.5 + (sum(" & middlec2 & x & ":" & TOC & x & "))" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "H" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "V" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5)"
+End If
+Next x
+
+
+
+' FindBEginOFmonth
+' Endofmonth Then
+' middleofmonth
+' middleofmonth2
+
+'this figures out the 2nd pay period total
+num1 = (DateDiff("d", FindBEginOFmonth, middleofmonth)) + 1
+num2 = (DateDiff("d", middleofmonth2, FindEndofmonth)) + 1
+Dim b
+For y = mid2c To endc 'mid2c To endc
+ midd = y
+Select Case midd    ' Evaluate Number.
+Case 1
+midd = "a"
+Case 2
+midd = "b"
+Case 3
+midd = "c"
+Case 4
+midd = "d"
+Case 5
+midd = "e"
+Case 6
+midd = "f"
+Case 7
+midd = "g"
+Case 8
+midd = "h"
+Case 9
+midd = "i"
+Case 10
+midd = "j"
+Case 11
+midd = "k"
+Case 12
+midd = "l"
+Case 13
+midd = "m"
+Case 14
+midd = "n"
+Case 15
+midd = "o"
+Case 16
+midd = "p"
+Case 17
+midd = "q"
+Case 18
+midd = "r"
+Case 19
+midd = "s"
+Case 20
+midd = "t"
+Case 21
+midd = "u"
+Case 22
+midd = "v"
+Case 23
+midd = "w"
+Case 24
+midd = "x"
+Case 25
+midd = "y"
+Case 26
+midd = "z"
+Case 27
+midd = "aa"
+Case 28
+midd = "ab"
+Case 29
+midd = "ac"
+Case 30
+midd = "ad"
+Case 31
+midd = "ae"
+Case 32
+midd = "af"
+Case 33
+midd = "ag"
+Case 34
+midd = "ah"
+Case 35
+midd = "ai"
+Case 36
+midd = "aj"
+Case 37
+midd = "ak"
+Case 38
+midd = "al"
+Case 39
+midd = "am"
+Case 40
+midd = "an"
+Case 41
+midd = "ao"
+Case 42
+midd = "ap"
+Case 43
+midd = "aq"
+End Select
+
+aa = ",IF(LEN(" & midd & "33)>1,VALUE(LEFT(" & midd & "33,1)),0)"
+ab = ab + aa
+
+
+ba = ",IF(LEN(" & midd & "34)>1,VALUE(LEFT(" & midd & "34,1)),0)"
+bb = bb + ba
+
+ca = ",IF(LEN(" & midd & "35)>1,VALUE(LEFT(" & midd & "35,1)),0)"
+cb = cb + ca
+
+da = ",IF(LEN(" & midd & "36)>1,VALUE(LEFT(" & midd & "36,1)),0)"
+Db = Db + da
+ 
+ea = ",IF(LEN(" & midd & "37)>1,VALUE(LEFT(" & midd & "37,1)),0)"
+eb = eb + ea
+ 
+Next y
+
+ac = Len(ab) - 1
+ad = Right(ab, ac)
+finall33 = "sum(" & ad & ")"
+
+bc = Len(bb) - 1
+bd = Right(bb, bc)
+finall34 = "sum(" & bd & ")"
+
+cc = Len(cb) - 1
+cd = Right(cb, cc)
+finall35 = "sum(" & cd & ")"
+
+dc = Len(Db) - 1
+dd = Right(Db, dc)
+finall36 = "sum(" & dd & ")"
+
+ec = Len(eb) - 1
+ed = Right(eb, ec)
+finall37 = "sum(" & ed & ")"
+
+
+
+
+
+
+
+
+
+For x = 8 To 18
+'If Len(Range("ar" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+
+'If x = 8 Then
+'If Len(Range("a" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+Range("ar" & x) = "=(countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "*G" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "*D" & Chr(34) & ")*7.5)" _
+& " + (countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "*S" & Chr(34) & ")*7.5)"
+Range("as" & x) = "=(countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "*G" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "*d" & Chr(34) & ")*7.5)" _
+& " + (countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "*S" & Chr(34) & ")*7.5)"
+
+
+
+'Range("as" & x) = "=(countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & finall33
+'ElseIf x = 9 Then
+'Range("as" & x) = "=(countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & finall34
+'ElseIf x = 10 Then
+'Range("as" & x) = "=(countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & finall35
+'ElseIf x = 11 Then
+'Range("as" & x) = "=(countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & finall36
+'ElseIf x = 12 Then
+'Range("as" & x) = "=(countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & middlec2 & x & ":" & TOC & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & finall37
+
+'End If
+
+'End If
+Next x
+
+
+
+
+
+
+
+num1 = (DateDiff("d", FindBEginOFmonth, middleofmonth)) + 1
+num2 = (DateDiff("d", middleofmonth2, FindEndofmonth)) + 1
+'this figures out the first pay period of pat timers
+
+For yy = firstc To midc 'firstc To midc
+ middd = yy
+Select Case middd    ' Evaluate Number.
+Case 1
+middd = "a"
+Case 2
+middd = "b"
+Case 3
+middd = "c"
+Case 4
+middd = "d"
+Case 5
+middd = "e"
+Case 6
+middd = "f"
+Case 7
+middd = "g"
+Case 8
+middd = "h"
+Case 9
+middd = "i"
+Case 10
+middd = "j"
+Case 11
+middd = "k"
+Case 12
+middd = "l"
+Case 13
+middd = "m"
+Case 14
+middd = "n"
+Case 15
+middd = "o"
+Case 16
+middd = "p"
+Case 17
+middd = "q"
+Case 18
+middd = "r"
+Case 19
+middd = "s"
+Case 20
+middd = "t"
+Case 21
+middd = "u"
+Case 22
+middd = "v"
+Case 23
+middd = "w"
+Case 24
+middd = "x"
+Case 25
+middd = "y"
+Case 26
+middd = "z"
+Case 27
+middd = "aa"
+Case 28
+middd = "ab"
+Case 29
+middd = "ac"
+Case 30
+middd = "ad"
+Case 31
+middd = "ae"
+Case 32
+middd = "af"
+Case 33
+middd = "ag"
+Case 34
+middd = "ah"
+Case 35
+middd = "ai"
+Case 36
+middd = "aj"
+Case 37
+middd = "ak"
+Case 38
+middd = "al"
+Case 39
+middd = "am"
+Case 40
+middd = "an"
+Case 41
+middd = "ao"
+Case 42
+middd = "ap"
+Case 43
+middd = "aq"
+End Select
+
+va = ",IF(LEN(" & middd & "33)>1,VALUE(LEFT(" & middd & "33,1)),0)"
+vb = vb + va
+
+wa = ",IF(LEN(" & middd & "34)>1,VALUE(LEFT(" & middd & "34,1)),0)"
+Wb = Wb + wa
+
+xa = ",IF(LEN(" & middd & "35)>1,VALUE(LEFT(" & middd & "35,1)),0)"
+xb = xb + xa
+
+ya = ",IF(LEN(" & middd & "36)>1,VALUE(LEFT(" & middd & "36,1)),0)"
+yb = yb + ya
+
+za = ",IF(LEN(" & middd & "37)>1,VALUE(LEFT(" & middd & "37,1)),0)"
+zb = zb + za
+Next yy
+
+
+vc = Len(vb) - 1
+vd = Right(vb, vc)
+final33 = "sum(" & vd & ")"
+
+wc = Len(Wb) - 1
+wd = Right(Wb, wc)
+final34 = "sum(" & wd & ")"
+
+xc = Len(xb) - 1
+xd = Right(xb, xc)
+final35 = "sum(" & xd & ")"
+
+yc = Len(yb) - 1
+yd = Right(yb, yc)
+final36 = "sum(" & yd & ")"
+
+zc = Len(zb) - 1
+zd = Right(zb, zc)
+final37 = "sum(" & zd & ")"
+
+For x = 8 To 18
+If x = 8 Then
+'Range("ar" & x) = "=(countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & final33
+ElseIf x = 9 Then
+'Range("ar" & x) = "=(countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & final34
+ElseIf x = 10 Then
+'Range("ar" & x) = "=(countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & final35
+ElseIf x = 11 Then
+'Range("ar" & x) = "=(countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & final36
+ElseIf x = 12 Then
+'Range("ar" & x) = "=(countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "D" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "S" & Chr(34) & ")*7.5" _
+& " + countif(" & fromc & x & ":" & middlec & x & "," & Chr(34) & "G" & Chr(34) & ")*7.5)" _
+& "+ " & final37
+End If
+Next x
+
+
+
+
+' this section puts in off days for fulltimers
+x = "a"
+startm = DateSerial(fy, fm, 1)  'begining date of calendar
+endm = DateSerial(fy, fm + 1, 0) 'Last month lastdate
+FindBEginOFmonth = DateSerial(fy, fm, 1) 'current month firstdate
+FindEndofmonth = DateSerial(fy, fm + 1, 0) 'Last month lastdate
+firstweekday = Format(startm, "ddd")
+firstdayofweek = Weekday(startm)
+numdaysbefore = firstdayofweek - 1
+secondweekday = Format(endm, "ddd")
+seconddayofweek = Weekday(endm)
+numberofdaysinmonth = Format(endm, "d")
+numdaysafter = 6 - seconddayofweek
+newmonth = DateSerial(fy, fm + 1, 1)
+startofc = DateSerial(fy, fm, -numdaysbefore)
+endofc = DateSerial(Year(newmonth), Month(newmonth), numdaysafter)
+totaldays = numberofdaysinmonth + numdaysbefore + numdaysafter
+datediffdays = DateDiff("d", startofc, endofc)
+startday = startm - numdaysbefore
+
+
+For c = 2 To totaldays + 2
+FindBEginOFmonth = DateSerial(fy, fm, 1) 'current month firstdate
+FindEndofmonth = DateSerial(fy, fm + 1, 0) 'Last month lastdate
+middleofmonth = DateSerial(fy, fm, 15)
+middleofmonth2 = DateSerial(fy, fm, 16)
+
+Set curcell = Cells(7, c)
+If Format(curcell, "d") = Val(x) And Format(curcell, "mmm") = Format(Range("bq32"), "mmm") Then moven = curcell.Column
+
+Next c
+
+'day shift off
+  For check = 2 To totaldays + 2
+  For rwcheck = 21 To 23
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(7, check), "DDD") Like Range("bd" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("be" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("bf" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("bg" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+'swing shift off days
+For check = 2 To totaldays + 2
+  For rwcheck = 27 To 29
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  If Format(Cells(7, check), "DDD") Like Range("bd" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("be" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("bf" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("bg" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+
+  'If Format(Cells(7, check), "DDD") Like Range("bd" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("be" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  Next rwcheck
+  Next check
+
+'grave shift off days
+For check = 2 To totaldays + 2
+  For rwcheck = 34 To 36
+  Set curcell = Cells(rwcheck, check)
+  If curcell = "x" Or curcell = "X" Then Cells(rwcheck, check) = ""
+  'If Format(Cells(7, check), "DDD") Like Range("bd" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("be" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+  If Format(Cells(7, check), "DDD") Like Range("bd" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("be" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("bf" & rwcheck) Or Format(Cells(7, check), "DDD") Like Range("bg" & rwcheck) Then Cells(rwcheck, check) = "X" 'Else Range("B8").Value = ""
+
+  Next rwcheck
+  Next check
+
+
+
+' this section starts to copy sheet and make new one
+Worksheets("menu").Copy After:=Worksheets(Sheets.Count)
+Worksheets(Sheets.Count).Name = monthh
+Worksheets(monthh).Range("a1:au1").Borders.LineStyle = xlLineStyleNone
+Worksheets(monthh).Range("a1:au1").Interior.ColorIndex = 15
+Worksheets(monthh).Range("a1:au1").Font.ColorIndex = 15
+Worksheets(monthh).laststep.Visible = False
+Worksheets(monthh).TextBox1.Visible = False
+Worksheets("menu").TextBox1.Visible = False
+'Worksheets("menu").TextBox2.Visible = False
+
+theyear = Worksheets("menu").Range("z1")
+theMonth = Worksheets("menu").Range("s1")
+
+
+'Worksheets(monthh).TextBox2.Visible = False
+
+
+' this clears out the data in part time schedule blocks
+'For ld = totaldays + 3 To 43
+'Set curcell = Worksheets(monthh).Cells(8, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(9, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(10, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(11, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(12, ld)
+'curcell.Value = ""
+' this clears out the data in dayshift schedule blocks
+'Set curcell = Worksheets(monthh).Cells(21, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(22, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(23, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(44, ld)
+'Set curcell = Worksheets(monthh).Cells(45, ld)
+'curcell.Value = ""
+' this clears out the data in swingshift schedule blocks
+'Set curcell = Worksheets(monthh).Cells(27, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(28, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(29, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(54, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(55, ld)
+'curcell.Value = ""
+' this clears out the data in graveshift schedule blocks
+'Set curcell = Worksheets(monthh).Cells(34, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(35, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(36, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(64, ld)
+'curcell.Value = ""
+'Set curcell = Worksheets(monthh).Cells(65, ld)
+'curcell.Value = ""
+'Next ld
+
+
+
+
+
+Call BuildSchedule
+GoTo finalend
+
+endthis:
+MsgBox ("There is Already A Schedule For " & monthh)
+
+finalend:
+Application.ScreenUpdating = True ' this speeds up code so does not update screen
+End Sub
+
+Private Sub Print1_Click()
+
+
+
+Application.ScreenUpdating = False
+
+ActiveSheet.PageSetup.PrintArea = "$a$1:$ba$33"
+ActiveSheet.PageSetup.Orientation = xlLandscape
+ActiveSheet.PageSetup.FitToPagesTall = 1
+ActiveSheet.PageSetup.FitToPagesWide = 1
+ActiveSheet.PageSetup.Zoom = False
+ActiveSheet.PrintOut
+ActiveSheet.PageSetup.PrintArea = ""
+Print1.Top = 408.75
+print2.Top = 423
+print3.Top = 438
+print4.Top = 452
+print5.Top = 466
+Application.ScreenUpdating = True
+
+End Sub
+
+Private Sub print2_Click()
+Application.ScreenUpdating = False
+ActiveSheet.Rows("33").EntireRow.Hidden = True
+ActiveSheet.PageSetup.PrintArea = "$a$2:$ba$34"
+ActiveSheet.PageSetup.FitToPagesTall = 1
+ActiveSheet.PageSetup.FitToPagesWide = 1
+ActiveSheet.PageSetup.Orientation = xlLandscape
+ActiveSheet.PrintOut
+ActiveSheet.PageSetup.PrintArea = ""
+ActiveSheet.Rows("33").EntireRow.Hidden = False
+Print1.Top = 408.75
+print2.Top = 423
+print3.Top = 438
+print4.Top = 452
+print5.Top = 466
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub print3_Click()
+Application.ScreenUpdating = False
+ActiveSheet.Rows("33").EntireRow.Hidden = True
+ActiveSheet.Rows("34").EntireRow.Hidden = True
+ActiveSheet.PageSetup.PrintArea = "$a$2:$ba$35"
+ActiveSheet.PageSetup.FitToPagesTall = 1
+ActiveSheet.PageSetup.FitToPagesWide = 1
+ActiveSheet.PageSetup.Orientation = xlLandscape
+ActiveSheet.PrintOut
+ActiveSheet.PageSetup.PrintArea = ""
+ActiveSheet.Rows("33").EntireRow.Hidden = False
+ActiveSheet.Rows("34").EntireRow.Hidden = False
+Print1.Top = 408.75
+print2.Top = 423
+print3.Top = 438
+print4.Top = 452
+print5.Top = 466
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub print4_Click()
+Application.ScreenUpdating = False
+ActiveSheet.Rows("33").EntireRow.Hidden = True
+ActiveSheet.Rows("34").EntireRow.Hidden = True
+ActiveSheet.Rows("35").EntireRow.Hidden = True
+ActiveSheet.PageSetup.PrintArea = "$a$2:$ba$36"
+ActiveSheet.PageSetup.FitToPagesTall = 1
+ActiveSheet.PageSetup.FitToPagesWide = 1
+ActiveSheet.PageSetup.Orientation = xlLandscape
+ActiveSheet.PrintOut
+ActiveSheet.PageSetup.PrintArea = ""
+ActiveSheet.Rows("33").EntireRow.Hidden = False
+ActiveSheet.Rows("34").EntireRow.Hidden = False
+ActiveSheet.Rows("35").EntireRow.Hidden = False
+Print1.Top = 408.75
+print2.Top = 423
+print3.Top = 438
+print4.Top = 452
+print5.Top = 466
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub print5_Click()
+Application.ScreenUpdating = False
+ActiveSheet.Rows("33").EntireRow.Hidden = True
+ActiveSheet.Rows("34").EntireRow.Hidden = True
+ActiveSheet.Rows("35").EntireRow.Hidden = True
+ActiveSheet.Rows("36").EntireRow.Hidden = True
+ActiveSheet.PageSetup.PrintArea = "$a$2:$ba$37"
+ActiveSheet.PageSetup.FitToPagesTall = 1
+ActiveSheet.PageSetup.FitToPagesWide = 1
+ActiveSheet.PageSetup.Orientation = xlLandscape
+ActiveSheet.PrintOut
+ActiveSheet.PageSetup.PrintArea = ""
+ActiveSheet.Rows("33").EntireRow.Hidden = False
+ActiveSheet.Rows("34").EntireRow.Hidden = False
+ActiveSheet.Rows("35").EntireRow.Hidden = False
+ActiveSheet.Rows("36").EntireRow.Hidden = False
+Print1.Top = 408.75
+print2.Top = 423
+print3.Top = 438
+print4.Top = 452
+print5.Top = 466
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub PrintAll_Click()
+pplication.ScreenUpdating = False
+
+ActiveSheet.PageSetup.PrintArea = "$a$1:$ba$69"
+ActiveSheet.PageSetup.Orientation = xlLandscape
+ActiveSheet.PageSetup.FitToPagesTall = 1
+ActiveSheet.PageSetup.FitToPagesWide = 1
+ActiveSheet.PageSetup.Zoom = False
+ActiveSheet.PrintOut
+ActiveSheet.PageSetup.PrintArea = ""
+Print1.Top = 408.75
+print2.Top = 423
+print3.Top = 438
+print4.Top = 452
+print5.Top = 466
+Application.ScreenUpdating = True
+End Sub
+
+Private Sub TextBox1_Change()
+
+End Sub
+
+
+
+
+Function WorksheetExists(WSName) As Boolean
+ 'This will tell you whether or not a sheet exists in the active workbook:
+   
+    On Error Resume Next
+    WorksheetExists = Len(Worksheets(WSName).Name) > 0
+    'MsgBox ("There is Already A Schedule For " & monthh)
+    'insert this as a separate function in your module and simply reference in yoru code i.e.:
+    'WorksheetExists ("Sheet1")
+    'it will return a 1 (boolean true) if the sheet is found and a 0 (false boolean) if it does not exist in the active workbook.
+
+    Exit Function
+End Function
+
+
+
+
+
+
+Private Sub selection_Change(ByVal Target As Range)
+
+
+   
+    ' this changes the days off on sheet menu page
+    
+    
+ Dim keyRange As Range
+Set keyRange = Range("az41") ':ba65")
+If Not Intersect(keyRange, Target) Is Nothing Then
+'If Target = False Then
+UserReply = MsgBox("it is true... Do you wish to continue?", vbYesNo)
+If UserReply = vbYes Then
+UserReply = MsgBox("you chose yes... Do you wish to continue?", vbYesNo)
+Else: End If
+
+'Else: End If
+End If
+
+
+
+
+End Sub
+
+Sub BuildSchedule()
+
+
+
+
+
+
+
+
+
+
+Application.DisplayAlerts = False
+
+
+'this puts in numbers in calendar instead of formula
+
+ 
+ 
+monthh = Format(Worksheets("menu").Range("bq32"), "mmm-yy")
+
+'tday1 = Worksheets(monthh).Range("p8")
+'tday2 = Worksheets(monthh).Range("q8")
+'tday3 = Worksheets(monthh).Range("r8")
+'tday4 = Worksheets(monthh).Range("s8")
+'tday5 = Worksheets(monthh).Range("t8")
+'tday6 = Worksheets(monthh).Range("u8")
+'tday7 = Worksheets(monthh).Range("v8")
+
+'tday8 = Worksheets(monthh).Range("p9")
+'tday9 = Worksheets(monthh).Range("q9")
+'tday10 = Worksheets(monthh).Range("r9")
+'tday11 = Worksheets(monthh).Range("s9")
+'tday12 = Worksheets(monthh).Range("t9")
+'tday13 = Worksheets(monthh).Range("u9")
+'tday14 = Worksheets(monthh).Range("v9")
+
+'tday15 = Worksheets(monthh).Range("p10")
+'tday16 = Worksheets(monthh).Range("q10")
+'tday17 = Worksheets(monthh).Range("r10")
+'tday18 = Worksheets(monthh).Range("s10")
+'tday19 = Worksheets(monthh).Range("t10")
+'tday20 = Worksheets(monthh).Range("u10")
+'tday21 = Worksheets(monthh).Range("v10")
+
+'tday22 = Worksheets(monthh).Range("p11")
+'tday23 = Worksheets(monthh).Range("q11")
+'tday24 = Worksheets(monthh).Range("r11")
+'tday25 = Worksheets(monthh).Range("s11")
+'tday26 = Worksheets(monthh).Range("t11")
+'tday27 = Worksheets(monthh).Range("u11")
+'tday28 = Worksheets(monthh).Range("v11")
+
+'tday29 = Worksheets(monthh).Range("p12")
+'tday30 = Worksheets(monthh).Range("q12")
+'tday31 = Worksheets(monthh).Range("r12")
+'tday32 = Worksheets(monthh).Range("s12")
+'tday33 = Worksheets(monthh).Range("t12")
+'tday35 = Worksheets(monthh).Range("v12")
+
+'tday36 = Worksheets(monthh).Range("p13")
+'tday38 = Worksheets(monthh).Range("r13")
+'tday39 = Worksheets(monthh).Range("s13")
+'tday40 = Worksheets(monthh).Range("tp13")
+'tday41 = Worksheets(monthh).Range("u13")
+'tday42 = Worksheets(monthh).Range("v13")
+ 
+ 
+ 
+
+
+
+
+monthh = Format(Range("bq32"), "mmm-yy")
+'this figures out holidays for year
+theyear = Val(Worksheets("menu").Range("aw1"))
+theMonth = Val(Worksheets("menu").Range("au1"))
+
+'Jan
+newyears = DateSerial(theyear, 1, 1) ' Jan
+pnewyears = DateSerial(theyear, 1, 1) ' Jan
+nnewyears = DateSerial(theyear, 1, 1) ' Jan
+newyearsday = Format(newyears, "d")
+
+martinsluther = NDow((theyear), 1, 3, 2)  'third monday Jan    ( goes year,month. week,weekday)
+
+martinLday = Format(martinsluther, "d")
+
+'feb
+presidentsday = DateSerial(theyear, 2, 22 - Weekday(DateSerial(theyear, 2, 1), vbTuesday)) '3rd monday in Feb
+Pressday = Format(presidentsday, "d")
+
+'may
+memorialday = NDow((theyear), 5, DOWsInMonth((theyear), 5, 2), 2) 'last monday may
+memoriald = Format(memorialday, "d")
+
+'july
+independance = DateSerial(theyear, 7, 4) ' July
+independanceday = Format(independance, "d")
+
+
+
+
+'sept
+laborday = NDow((theyear), 9, 1, 2)  'first monday sept ( goes year,month. week,weekday)
+labord = Format(laborday, "d")
+
+'oct
+columbusday = NDow((theyear), 10, 2, 2)  'Sec monday Oct    ( goes year,month. week,weekday)
+ColumbusD = Format(columbusday, "d")
+
+
+'Nov
+vetransday = DateSerial(theyear, 11, 11) ' nov
+vetransD = Format(vetransday, "d")
+ThanksgivingDate = DateSerial(theyear, 11, 29 - Weekday(DateSerial(theyear, 11, 1), vbFriday)) ' 3rd thursday
+thanksg = Format(ThanksgivingDate, "d")
+
+'dec
+ChristmasD = DateSerial(theyear, 12, 25) ' Jan
+christmasday = Format(ChristmasD, "d")
+
+
+
+Dim test1 As Date, test2 As Date, test3 As Date
+'does the curtrent month
+If theMonth = 1 Then ' checks for jan holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ 
+ If Worksheets(monthh).Cells(gx, gY) = Val(newyearsday) Or Worksheets(monthh).Cells(gx, gY) = Val(martinLday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+ Worksheets(monthh).Range("au26") = "New Years Day- Jan 1"
+ Worksheets(monthh).Range("au27") = "Martin Luther Day- Jan " & martinLday
+ Worksheets(monthh).Range("au25") = "2 Holiday's in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+
+For g = 2 To 43
+If Worksheets(monthh).Cells(7, g) = "" Then
+Else
+test1 = Format(Worksheets(monthh).Cells(7, g), "Short Date")
+test2 = Format(newyears, "Short Date")
+test3 = Format(martinsluther, "Short Date")
+If test1 = test2 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+ElseIf test1 = test3 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+End If
+End If
+Next g
+
+
+
+ElseIf theMonth = 2 Then ' checks for feb holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(Pressday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  Worksheets(monthh).Range("au26") = "Pressidents Day- Feb " & Pressday
+ Worksheets(monthh).Range("au25") = "1 Holiday in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+For g = 2 To 43
+If Worksheets(monthh).Cells(7, g) = "" Then
+Else
+test1 = Format(Worksheets(monthh).Cells(7, g), "Short Date")
+test2 = Format(presidentsday, "Short Date")
+If test1 = test2 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+End If
+End If
+Next g
+
+
+
+
+
+ElseIf theMonth = 3 Then ' checks for MAr holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ Worksheets(monthh).Range("au25") = "No Holiday in Month"
+ End If
+Next gY
+Next gx
+
+ElseIf theMonth = 4 Then ' checks for Apr holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ Worksheets(monthh).Range("au25") = "No Holiday in Month"
+ End If
+Next gY
+Next gx
+
+ElseIf theMonth = 5 Then ' checks for May holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(memoriald) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  Worksheets(monthh).Range("au26") = "Memorial Day- May " & memoriald
+ Worksheets(monthh).Range("au25") = "1 Holiday in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+For g = 2 To 43
+If Worksheets(monthh).Cells(7, g) = "" Then
+Else
+test1 = Format(Worksheets(monthh).Cells(7, g), "Short Date")
+test2 = Format(memorialday, "Short Date")
+If test1 = test2 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+End If
+End If
+Next g
+
+
+
+
+ElseIf theMonth = 6 Then ' checks for Jun holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ Worksheets(monthh).Range("au25") = "No Holiday in Month"
+ End If
+Next gY
+Next gx
+
+ElseIf theMonth = 7 Then ' checks for Jul holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(independanceday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  Worksheets(monthh).Range("au26") = "Independance Day- July " & independanceday
+  Worksheets(monthh).Range("au25") = "1 Holiday in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+For g = 2 To 43
+If Worksheets(monthh).Cells(7, g) = "" Then
+Else
+test1 = Format(Worksheets(monthh).Cells(7, g), "Short Date")
+test2 = Format(independance, "Short Date")
+If test1 = test2 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+End If
+End If
+Next g
+
+
+
+
+ElseIf theMonth = 8 Then ' checks for Aug holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ Worksheets(monthh).Range("au25") = "No Holiday in Month"
+ End If
+Next gY
+Next gx
+
+ElseIf theMonth = 9 Then ' checks for Sep holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(labord) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  Worksheets(monthh).Range("au26") = "Labor Day- Sept " & labord
+  Worksheets(monthh).Range("au25") = "1 Holiday in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+For g = 2 To 43
+If Worksheets(monthh).Cells(7, g) = "" Then
+Else
+test1 = Format(Worksheets(monthh).Cells(7, g), "Short Date")
+test2 = Format(laborday, "Short Date")
+If test1 = test2 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+End If
+End If
+Next g
+
+
+ElseIf theMonth = 10 Then ' checks for Oct holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(ColumbusD) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  Worksheets(monthh).Range("au26") = "ColumbusD- October " & ColumbusD
+  Worksheets(monthh).Range("au25") = "1 Holiday in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+
+ElseIf theMonth = 11 Then ' checks for Nov holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(vetransD) Or Worksheets(monthh).Cells(gx, gY) = Val(thanksg) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+ Worksheets(monthh).Range("au26") = "Vetrans Day- Nov" & vetransD
+ Worksheets(monthh).Range("au27") = "ThanksGiving Day- Nov " & thanksg
+  Worksheets(monthh).Range("au25") = "2 Holiday's in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+For g = 2 To 43
+If Worksheets(monthh).Cells(7, g) = "" Then
+Else
+test1 = Format(Worksheets(monthh).Cells(7, g), "Short Date")
+test2 = Format(vetransday, "Short Date")
+test3 = Format(ThanksgivingDate, "Short Date")
+If test1 = test2 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+ElseIf test1 = test3 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+End If
+End If
+Next g
+
+
+
+
+
+ElseIf theMonth = 12 Then ' checks for Dec holidays
+For gx = 19 To 24 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(christmasday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  Worksheets(monthh).Range("au26") = "Christmas Day- Dec " & christmasday
+  Worksheets(monthh).Range("au25") = "1 Holiday in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+End If
+
+For g = 2 To 43
+If Worksheets(monthh).Cells(7, g) = "" Then
+Else
+test1 = Format(Worksheets(monthh).Cells(7, g), "Short Date")
+test2 = Format(ChristmasD, "Short Date")
+If test1 = test2 Then
+Worksheets(monthh).Cells(6, g).Interior.ColorIndex = 4
+End If
+End If
+Next g
+
+
+
+
+
+pmonthn = Format(Worksheets(monthh).Range("bq35"), "m")
+'this does month before
+'For nx = 8 To 13 ' this does rows
+'For nY = 46 To 52 ' this does colummns
+If pmonthn = 1 Then ' checks for jan holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(newyearsday) Or Worksheets(monthh).Cells(gx, gY) = Val(martinLday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+  
+  test = Len(Worksheets(monthh).Cells(gx, gY))
+ 
+ If Worksheets(monthh).Cells(gx, gY) = Val(newyearsday) Or Worksheets(monthh).Cells(gx, gY) = Val(martinLday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+ Worksheets(monthh).Range("au26") = "New Years Day- Jan 1"
+ Worksheets(monthh).Range("au27") = "Martin Luther Day- Jan " & martinLday
+ Worksheets(monthh).Range("au25") = "2 Holiday's in Month"
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+ElseIf pmonthn = 2 Then ' checks for feb holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(Pressday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+ElseIf pmonthn = 3 Then ' checks for MAr holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ 
+ End If
+Next gY
+Next gx
+
+ElseIf pmonthn = 4 Then ' checks for Apr holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+  End If
+Next gY
+Next gx
+
+ElseIf pmonthn = 5 Then ' checks for May holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(memoriald) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+
+ElseIf pmonthn = 6 Then ' checks for Jun holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+  End If
+Next gY
+Next gx
+
+ElseIf pmonthn = 7 Then ' checks for Jul holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(independanceday) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+ElseIf pmonthn = 8 Then ' checks for Aug holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+  End If
+Next gY
+Next gx
+
+ElseIf pmonthn = 9 Then ' checks for Sep holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(labord) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+ ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+
+ElseIf pmonthn = 10 Then ' checks for Oct holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ If Worksheets(monthh).Cells(gx, gY) = Val(ColumbusD) Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 4
+  ElseIf Worksheets(monthh).Cells(gx, gY) <= 31 And test >= 1 Then
+ Worksheets(monthh).Cells(gx, gY).Interior.ColorIndex = 19
+ End If
+Next gY
+Next gx
+
+
+ElseIf pmonthn = 11 Then ' checks for Nov holidays
+For gx = 7 To 12 ' this does rows
+For gY = 47 To 53 ' this does colummns
+ test = Len(Worksheets(monthh).Cells(gx, gY))
+ 
+ 
+'Worksheets(monthh).Range("r13") = tday38
+'Worksheets(monthh).Range("s13") = tday39
+'Worksheets(monthh).Range("t13") = tday40
+'Worksheets(monthh).Range("u13") = tday41
+'Worksheets(monthh).Range("v13") = tday42
+
+'this puts code in current month
+Worksheets(monthh).Range("au19:ba24") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'this puts code in next month
+Worksheets(monthh).Range("au34:ba39") = "=IF(MONTH(nmonth)<>MONTH(nmonth-nStartDayweek+(nweeknum-1)*7+nweekday)," & Chr(34) & Chr(34) & ",DAY(nmonth-nStartDayweek+(nweeknum-1)*7+nweekday))"
+'this puts code in previos month
+Worksheets(monthh).Range("au7:ba12") = "=IF(MONTH(pMonth)<>MONTH(pMonth-pStartDayweek+(pweeknum-1)*7+prevweekday)," & Chr(34) & Chr(34) & ",DAY(pMonth-pStartDayweek+(pweeknum-1)*7+prevweekday))"
+
+
+
+'Worksheets("Menu").Range("p8") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+'Worksheets("Menu").Range("q8") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("r8") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+
+'Worksheets("Menu").Range("s8") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("t8") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("u8") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("v8") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+'Worksheets("Menu").Range("p9") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("q9") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("r9") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+'Worksheets("Menu").Range("s9") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("t9") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("u9") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("v9") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+'Worksheets("Menu").Range("p10") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("q10") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("r10") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("s10") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("t10") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("u10") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("v10") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+'Worksheets("Menu").Range("p11") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("q11") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("r11") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("s11") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("t11") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("u11") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("v11") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+'Worksheets("Menu").Range("p12") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("q12") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("r12") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("s12") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("t12") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("u12") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("v12") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+'Worksheets("Menu").Range("p13") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("q13") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("r13") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("s13") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("t13") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("u13") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+'Worksheets("Menu").Range("v13") = "=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday)," & Chr(34) & Chr(34) & ",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+
+
+
+
+
+'"=IF(MONTH(Sdate)<>MONTH(Sdate-StartDayweek+(weekno-1)*7+Weekday),"",DAY(Sdate-StartDayweek+(weekno-1)*7+Weekday))"
+
+Worksheets(monthh).Activate
+ActiveSheet.Range("bd41") = ActiveSheet.Range("az41")
+ActiveSheet.Range("bd42") = ActiveSheet.Range("az42")
+ActiveSheet.Range("bd43") = ActiveSheet.Range("az43")
+ActiveSheet.Range("bd44") = ActiveSheet.Range("az44")
+ActiveSheet.Range("bd45") = ActiveSheet.Range("az45")
+ActiveSheet.Range("bd51") = ActiveSheet.Range("az51")
+ActiveSheet.Range("bd52") = ActiveSheet.Range("az52")
+ActiveSheet.Range("bd53") = ActiveSheet.Range("az53")
+ActiveSheet.Range("bd54") = ActiveSheet.Range("az54")
+ActiveSheet.Range("bd55") = ActiveSheet.Range("az55")
+ActiveSheet.Range("bd61") = ActiveSheet.Range("az61")
+ActiveSheet.Range("bd62") = ActiveSheet.Range("az62")
+ActiveSheet.Range("bd63") = ActiveSheet.Range("az63")
+ActiveSheet.Range("bd64") = ActiveSheet.Range("az64")
+ActiveSheet.Range("bd65") = ActiveSheet.Range("az65")
+
+ActiveSheet.Range("be41") = ActiveSheet.Range("ba41")
+ActiveSheet.Range("be42") = ActiveSheet.Range("ba42")
+ActiveSheet.Range("be43") = ActiveSheet.Range("ba43")
+ActiveSheet.Range("be44") = ActiveSheet.Range("ba44")
+ActiveSheet.Range("be45") = ActiveSheet.Range("ba45")
+ActiveSheet.Range("be51") = ActiveSheet.Range("ba51")
+ActiveSheet.Range("be52") = ActiveSheet.Range("ba52")
+ActiveSheet.Range("be53") = ActiveSheet.Range("ba53")
+ActiveSheet.Range("be54") = ActiveSheet.Range("ba54")
+ActiveSheet.Range("be55") = ActiveSheet.Range("ba55")
+ActiveSheet.Range("be61") = ActiveSheet.Range("ba61")
+ActiveSheet.Range("be62") = ActiveSheet.Range("ba62")
+ActiveSheet.Range("be63") = ActiveSheet.Range("ba63")
+ActiveSheet.Range("be64") = ActiveSheet.Range("ba64")
+ActiveSheet.Range("be65") = ActiveSheet.Range("ba65")
+
+
+Set curcell = Cells(24, 1)
+Worksheets(monthh).Rows("1:2").EntireRow.Hidden = True
+
+Application.DisplayAlerts = True
+
+
+
+
+End Sub
+
+Private Sub TextBox2_Change()
+
+End Sub
+
+Private Sub Worksheet_Activate()
+'TextBox2.Text = "This is the Menu Not A Calendar Month"
+If ActiveSheet.Name = "Menu" Then
+'TextBox2.Visible = True
+Else
+'TextBox2.Visible = False
+End If
+End Sub
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+   ' this changes the days off on sheet menu page
+    
+    
+ Dim keyRange As Range
+Set keyRange = Range("az41:ba65")
+If Not Intersect(keyRange, Target) Is Nothing Then
+'If Target = False Then
+
+
+
+
+
+'UserReply = MsgBox("it is true... Do you wish to continue?", vbYesNo)
+'If UserReply = vbYes Then
+'UserReply = MsgBox("you chose yes... Do you wish to continue?", vbYesNo)
+'Else: End If
+
+'Else: End If
+End If
+End Sub
+Sub svaefile()
+For moven = 2 To 43
+Select Case Start ' Evaluate Number.
+
+If moven = 1 Then Start = "a"
+If moven = 2 Then Start = "b"
+If moven = 3 Then Start = "c"
+If moven = 4 Then Start = "d"
+If moven = 5 Then Start = "e"
+If moven = 6 Then Start = "f"
+If moven = 7 Then Start = "g"
+If moven = 8 Then Start = "h"
+If moven = 9 Then Start = "i"
+If moven = 10 Then Start = "j"
+If moven = 11 Then Start = "k"
+If moven = 12 Then Start = "l"
+If moven = 13 Then Start = "m"
+If moven = 14 Then Start = "n"
+If moven = 15 Then Start = "o"
+If moven = 16 Then Start = "p"
+If moven = 17 Then Start = "q"
+If moven = 18 Then Start = "r"
+If moven = 19 Then Start = "s"
+If moven = 20 Then Start = "t"
+If moven = 21 Then Start = "u"
+If moven = 22 Then Start = "v"
+If moven = 23 Then Start = "w"
+If moven = 24 Then Start = "x"
+If moven = 25 Then Start = "y"
+If moven = 26 Then Start = "z"
+If moven = 27 Then Start = "aa"
+If moven = 28 Then Start = "ab"
+If moven = 29 Then Start = "ac"
+If moven = 30 Then Start = "ad"
+If moven = 31 Then Start = "ae"
+If moven = 32 Then Start = "af"
+If moven = 33 Then Start = "ag"
+If moven = 34 Then Start = "ah"
+If moven = 35 Then Start = "ai"
+If moven = 36 Then Start = "aj"
+If moven = 37 Then Start = "ak"
+If moven = 38 Then Start = "al"
+If moven = 39 Then Start = "am"
+If moven = 40 Then Start = "an"
+If moven = 41 Then Start = "ao"
+If moven = 42 Then Start = "ap"
+If moven = 43 Then Start = "aq"
+
+
+
+If Len(Range("A33")) > 1 Then amtp = 33
+If Len(Range("A34")) > 1 Then amtp = 34
+If Len(Range("A35")) > 1 Then amtp = 35
+If Len(Range("A36")) > 1 Then amtp = 36
+If Len(Range("A37")) > 1 Then amtp = 37
+If Len(Range("A38")) > 1 Then amtp = 38
+If Len(Range("A39")) > 1 Then amtp = 39
+If Len(Range("A40")) > 1 Then amtp = 40
+
+'If Len(Range("A41")) > 1 Then amtd = 41
+'If Len(Range("A42")) > 1 Then amtd = 42
+If Len(Range("A43")) > 1 Then amtd = 43
+If Len(Range("A44")) > 1 Then amtd = 44
+If Len(Range("A45")) > 1 Then amtd = 45
+
+If Len(Range("A51")) > 1 Then amts = 51
+If Len(Range("A52")) > 1 Then amts = 52
+If Len(Range("A53")) > 1 Then amts = 53
+'If Len(Range("A54")) > 1 Then amts = 54
+'If Len(Range("A55")) > 1 Then amts = 55
+
+If Len(Range("A59")) > 1 Then amtg = 59
+If Len(Range("A60")) > 1 Then amtg = 60
+If Len(Range("A61")) > 1 Then amtg = 61
+'If Len(Range("A64")) > 1 Then amtg = 64
+'If Len(Range("A65")) > 1 Then amtg = 65
+
+If Range(Start & 7).Value = "" Then
+Range(Start & 24).Value = ""
+Range(Start & 30).Value = ""
+Range(Start & 37).Value = ""
+
+Else
+'Like "*" And Range("bc8") = "FT" Then
+'this Add total on shift
+
+Range(Start & 24).Value = "=countblank(" & Start & "49:" & Start & amtd & ")" _
+& "+ COUNTIF(" & Start & 41 & ":" & Start & amtd & "," & Chr(34) & ">=1" & Chr(34) & ")" _
+& " + COUNTIF(" & Start & 33 & ":" & Start & amtp & "," & Chr(34) & ">=1" & Chr(34) & ")" _
+& " + COUNTIF(" & Start & 33 & ":" & Start & amtp & "," & Chr(34) & "*D*" & Chr(34) & ")"
+
+Range(Start & 30).Value = "=countblank(" & Start & "55:" & Start & amts & ")" _
+& "+ COUNTIF(" & Start & 51 & ":" & Start & amts & "," & Chr(34) & ">=1" & Chr(34) & ")" _
+& " + COUNTIF(" & Start & 33 & ":" & Start & amtp & "," & Chr(34) & ">=1" & Chr(34) & ")" _
+& " + COUNTIF(" & Start & 33 & ":" & Start & amtp & "," & Chr(34) & "*S*" & Chr(34) & ")"
+
+
+Range(Start & 37).Value = "=countblank(" & Start & "62:" & Start & amtg & ")" _
+& "+ COUNTIF(" & Start & 61 & ":" & Start & amtg & "," & Chr(34) & ">=1" & Chr(34) & ")" _
+& " + COUNTIF(" & Start & 33 & ":" & Start & amtp & "," & Chr(34) & ">=1" & Chr(34) & ")" _
+& " + COUNTIF(" & Start & 33 & ":" & Start & amtp & "," & Chr(34) & "*G*" & Chr(34) & ")"
+
+
+
+
+End If
+Next moven
+
+' this part does the fulltimers weekly overtime
+For x = 41 To 45
+If Len(Range("a" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+Range("aT" & x) = "=(IF(B32>=1,COUNTBLANK(B" & x & ")*8)+ SUM(B" & x & "))" _
+& "+ (IF(C32>=1,COUNTBLANK(c" & x & ")*8)+ SUM(C" & x & "))" _
+& "+ (IF(D32>=1,COUNTBLANK(d" & x & ")*8)+ SUM(D" & x & "))" _
+& "+ (IF(E32>=1,COUNTBLANK(e" & x & ")*8)+ SUM(E" & x & "))" _
+& " + (IF(F32>=1,COUNTBLANK(F" & x & ")*8)+ SUM(F" & x & "))" _
+& "+ (IF(G32>=1,COUNTBLANK(G" & x & ")*8)+ SUM(G" & x & "))" _
+& "+ (IF(H32>=1,COUNTBLANK(H" & x & ")*8)+ SUM(h" & x & "))"
+'RANGE IS FROM B-h
+Range("aU" & x) = "=(IF(I32>=1,COUNTBLANK(I" & x & ")*8)+ SUM(I" & x & "))" _
+& "+ (IF(J32>=1,COUNTBLANK(J" & x & ")*8)+ SUM(J" & x & "))" _
+& "+ (IF(K32>=1,COUNTBLANK(K" & x & ")*8)+ SUM(K" & x & "))" _
+& "+ (IF(L32>=1,COUNTBLANK(L" & x & ")*8)+ SUM(L" & x & "))" _
+& " + (IF(M32>=1,COUNTBLANK(M" & x & ")*8)+ SUM(M" & x & "))" _
+& "+ (IF(N32>=1,COUNTBLANK(N" & x & ")*8)+ SUM(N" & x & "))" _
+& "+ (IF(O32>=1,COUNTBLANK(O" & x & ")*8)+ SUM(O" & x & "))"
+'RANGE IS FROM i-O
+Range("aV" & x) = "=(IF(P32>=1,COUNTBLANK(P" & x & ")*8)+ SUM(P" & x & "))" _
+& "+ (IF(Q32>=1,COUNTBLANK(Q" & x & ")*8)+ SUM(Q" & x & "))" _
+& "+ (IF(R32>=1,COUNTBLANK(R" & x & ")*8)+ SUM(R" & x & "))" _
+& "+ (IF(S32>=1,COUNTBLANK(S" & x & ")*8)+ SUM(S" & x & "))" _
+& " + (IF(T32>=1,COUNTBLANK(T" & x & ")*8)+ SUM(T" & x & "))" _
+& "+ (IF(U32>=1,COUNTBLANK(U" & x & ")*8)+ SUM(U" & x & "))" _
+& "+ (IF(V32>=1,COUNTBLANK(V" & x & ")*8)+ SUM(V" & x & "))"
+'RANGE IS FROM p-V
+Range("aW" & x) = "=(IF(W32>=1,COUNTBLANK(W" & x & ")*8)+ SUM(W" & x & "))" _
+& "+ (IF(X32>=1,COUNTBLANK(X" & x & ")*8)+ SUM(X" & x & "))" _
+& "+ (IF(Y32>=1,COUNTBLANK(Y" & x & ")*8)+ SUM(Y" & x & "))" _
+& "+ (IF(Z32>=1,COUNTBLANK(Z" & x & ")*8)+ SUM(Z" & x & "))" _
+& " + (IF(AA32>=1,COUNTBLANK(AA" & x & ")*8)+ SUM(AA" & x & "))" _
+& "+ (IF(AB32>=1,COUNTBLANK(AB" & x & ")*8)+ SUM(AB" & x & "))" _
+& "+ (IF(AC32>=1,COUNTBLANK(AC" & x & ")*8)+ SUM(AC" & x & "))"
+'RANGE IS FROM W-AC
+Range("aX" & x) = "=(IF(AD32>=1,COUNTBLANK(AD" & x & ")*8)+ SUM(AD" & x & "))" _
+& "+ (IF(AE32>=1,COUNTBLANK(AE" & x & ")*8)+ SUM(AE" & x & "))" _
+& "+ (IF(AF32>=1,COUNTBLANK(AF" & x & ")*8)+ SUM(AF" & x & "))" _
+& "+ (IF(AG32>=1,COUNTBLANK(AG" & x & ")*8)+ SUM(AG" & x & "))" _
+& " + (IF(AH32>=1,COUNTBLANK(AH" & x & ")*8)+ SUM(AH" & x & "))" _
+& "+ (IF(AI32>=1,COUNTBLANK(AI" & x & ")*8)+ SUM(AI" & x & "))" _
+& "+ (IF(AJ32>=1,COUNTBLANK(AJ" & x & ")*8)+ SUM(AJ" & x & "))"
+'RANGE IS FROM AD-AJ
+Range("ay" & x) = "=(IF(AK32>=1,COUNTBLANK(AK" & x & ")*8)+ SUM(AK" & x & "))" _
+& "+ (IF(AL32>=1,COUNTBLANK(AL" & x & ")*8)+ SUM(AL" & x & "))" _
+& "+ (IF(AM32>=1,COUNTBLANK(AM" & x & ")*8)+ SUM(AM" & x & "))" _
+& "+ (IF(AN32>=1,COUNTBLANK(AN" & x & ")*8)+ SUM(AN" & x & "))" _
+& "+ (IF(AO32>=1,COUNTBLANK(AO" & x & ")*8)+ SUM(AO" & x & "))" _
+& "+ (IF(AP32>=1,COUNTBLANK(AP" & x & ")*8)+ SUM(AP" & x & "))" _
+& "+ (IF(AQ32>=1,COUNTBLANK(AQ" & x & ")*8)+ SUM(AQ" & x & "))"
+'RANGE IS FROM AK-AQ
+Else
+End If
+Next x
+
+For x = 51 To 55
+If Len(Range("a" & x)) > 2 Then ' this makes sure ther is a name 0n fulltimer
+Range("aT" & x) = "=(IF(B32>=1,COUNTBLANK(B" & x & ")*8)+ SUM(B" & x & "))" _
+& "+ (IF(C32>=1,COUNTBLANK(c" & x & ")*8)+ SUM(C" & x & "))" _
+& "+ (IF(D32>=1,COUNTBLANK(d" & x & ")*8)+ SUM(D" & x & "))" _
+& "+ (IF(E32>=1,COUNTBLANK(e" & x & ")*8)+ SUM(E" & x & "))" _
+& " + (IF(F32>=1,COUNTBLANK(F" & x & ")*8)+ SUM(F" & x & "))" _
+& "+ (IF(G32>=1,COUNTBLANK(G" & x & ")*8)+ SUM(G" & x & "))" _
+& "+ (IF(H32>=1,COUNTBLANK(H" & x & ")*8)+ SUM(h" & x & "))"
+'RANGE IS FROM B-h
+Range("aU" & x) = "=(IF(I32>=1,COUNTBLANK(I" & x & ")*8)+ SUM(I" & x & "))" _
+& "+ (IF(J32>=1,COUNTBLANK(J" & x & ")*8)+ SUM(J" & x & "))" _
+& "+ (IF(K32>=1,COUNTBLANK(K" & x & ")*8)+ SUM(K" & x & "))" _
+& "+ (IF(L32>=1,COUNTBLANK(L" & x & ")*8)+ SUM(L" & x & "))" _
+& " + (IF(M32>=1,COUNTBLANK(M" & x & ")*8)+ SUM(M" & x & "))" _
+& "+ (IF(N32>=1,COUNTBLANK(N" & x & ")*8)+ SUM(N" & x & "))" _
+& "+ (IF(O32>=1,COUNTBLANK(O" & x & ")*8)+ SUM(O" & x & "))"
+'RANGE IS FROM i-O
+Range("aV" & x) = "=(IF(P32>=1,COUNTBLANK(P" & x & ")*8)+ SUM(P" & x & "))" _
+& "+ (IF(Q32>=1,COUNTBLANK(Q" & x & ")*8)+ SUM(Q" & x & "))" _
+& "+ (IF(R32>=1,COUNTBLANK(R" & x & ")*8)+ SUM(R" & x & "))" _
+& "+ (IF(S32>=1,COUNTBLANK(S" & x & ")*8)+ SUM(S" & x & "))" _
+& " + (IF(T32>=1,COUNTBLANK(T" & x & ")*8)+ SUM(T" & x & "))" _
+& "+ (IF(U32>=1,COUNTBLANK(U" & x & ")*8)+ SUM(U" & x & "))" _
+& "+ (IF(V32>=1,COUNTBLANK(V" & x & ")*8)+ SUM(V" & x & "))"
+'RANGE IS FROM p-V
+Range("aW" & x) = "=(IF(W32>=1,COUNTBLANK(W" & x & ")*8)+ SUM(W" & x & "))" _
+& "+ (IF(X32>=1,COUNTBLANK(X" & x & ")*8)+ SUM(X" & x & "))" _
+& "+ (IF(Y32>=1,COUNTBLANK(Y" & x & ")*8)+ SUM(Y" & x & "))" _
+& "+ (IF(Z32>=1,COUNTBLANK(Z" & x & ")*8)+ SUM(Z" & x & "))" _
+& " + (IF(AA32>=1,COUNTBLANK(AA" & x & ")*8)+ SUM(AA" & x & "))" _
+& "+ (IF(AB32>=1,COUNTBLANK(AB" & x & ")*8)+ SUM(AB" & x & "))" _
+& "+ (IF(AC32>=1,COUNTBLANK(AC" & x & ")*8)+ SUM(AC" & x & "))"
+'RANGE IS FROM W-AC
+Range("aX" & x) = "=(IF(AD32>=1,COUNTBLANK(AD" & x & ")*8)+ SUM(AD" & x & "))" _
+& "+ (IF(AE32>=1,COUNTBLANK(AE" & x & ")*8)+ SUM(AE" & x & "))" _
+& "+ (IF(AF32>=1,COUNTBLANK(AF" & x & ")*8)+ SUM(AF" & x & "))" _
+& "+ (IF(AG32>=1,COUNTBLANK(AG" & x & ")*8)+ SUM(AG" & x & "))" _
+& " + (IF(AH32>=1,COUNTBLANK(AH" & x & ")*8)+ SUM(AH" & x & "))" _
+& "+ (IF(AI32>=1,COUNTBLANK(AI" & x & ")*8)+ SUM(AI" & x & "))" _
+& "+ (IF(AJ32>=1,COUNTBLANK(AJ" & x & ")*8)+ SUM(AJ" & x & "))"
+'RANGE IS FROM AD-AJ
+Range("ay" & x) = "=(IF(AK32>=1,COUNTBLANK(AK" & x & ")*8)+ SUM(AK" & x & "))" _
+& "+ (IF(AL32>=1,COUNTBLANK(AL" & x & ")*8)+ SUM(AL" & x & "))" _
+& "+ (IF(AM32>=1,COUNTBLANK(AM" & x & ")*8)+ SUM(AM" & x & "))" _
+& "+ (IF(AN32>=1,COUNTBLANK(AN" & x & ")*8)+ SUM(AN" & x & "))" _
+& "+ (IF(AO32>=1,COUNTBLANK(AO" & x & ")*8)+ SUM(AO" & x & "))" _
+& "+ (IF(AP32>=1,COUNTBLANK(AP" & x & ")*8)+ SUM(AP" & x & "))" _
+& "+ (IF(AQ32>=1,COUNTBLANK(AQ" & x & ")*8)+ SUM(AQ" & x & "))"
+'RANGE IS FROM AK-AQ
+Else
+End If
+Next x
+
+
+For x = 61 To 65
+If Len(Range("a" & x)) > 1 Then ' this makes sure ther is a name 0n fulltimer
+Range("aT" & x) = "=(IF(B32>=1,COUNTBLANK(B" & x & ")*8)+ SUM(B" & x & "))" _
+& "+ (IF(C32>=1,COUNTBLANK(c" & x & ")*8)+ SUM(C" & x & "))" _
+& "+ (IF(D32>=1,COUNTBLANK(d" & x & ")*8)+ SUM(D" & x & "))" _
+& "+ (IF(E32>=1,COUNTBLANK(e" & x & ")*8)+ SUM(E" & x & "))" _
+& " + (IF(F32>=1,COUNTBLANK(F" & x & ")*8)+ SUM(F" & x & "))" _
+& "+ (IF(G32>=1,COUNTBLANK(G" & x & ")*8)+ SUM(G" & x & "))" _
+& "+ (IF(H32>=1,COUNTBLANK(H" & x & ")*8)+ SUM(h" & x & "))"
+'RANGE IS FROM B-h
+Range("aU" & x) = "=(IF(I32>=1,COUNTBLANK(I" & x & ")*8)+ SUM(I" & x & "))" _
+& "+ (IF(J32>=1,COUNTBLANK(J" & x & ")*8)+ SUM(J" & x & "))" _
+& "+ (IF(K32>=1,COUNTBLANK(K" & x & ")*8)+ SUM(K" & x & "))" _
+& "+ (IF(L32>=1,COUNTBLANK(L" & x & ")*8)+ SUM(L" & x & "))" _
+& " + (IF(M32>=1,COUNTBLANK(M" & x & ")*8)+ SUM(M" & x & "))" _
+& "+ (IF(N32>=1,COUNTBLANK(N" & x & ")*8)+ SUM(N" & x & "))" _
+& "+ (IF(O32>=1,COUNTBLANK(O" & x & ")*8)+ SUM(O" & x & "))"
+'RANGE IS FROM i-O
+Range("aV" & x) = "=(IF(P32>=1,COUNTBLANK(P" & x & ")*8)+ SUM(P" & x & "))" _
+& "+ (IF(Q32>=1,COUNTBLANK(Q" & x & ")*8)+ SUM(Q" & x & "))" _
+& "+ (IF(R32>=1,COUNTBLANK(R" & x & ")*8)+ SUM(R" & x & "))" _
+& "+ (IF(S32>=1,COUNTBLANK(S" & x & ")*8)+ SUM(S" & x & "))" _
+& " + (IF(T32>=1,COUNTBLANK(T" & x & ")*8)+ SUM(T" & x & "))" _
+& "+ (IF(U32>=1,COUNTBLANK(U" & x & ")*8)+ SUM(U" & x & "))" _
+& "+ (IF(V32>=1,COUNTBLANK(V" & x & ")*8)+ SUM(V" & x & "))"
+'RANGE IS FROM p-V
+Range("aW" & x) = "=(IF(W32>=1,COUNTBLANK(W" & x & ")*8)+ SUM(W" & x & "))" _
+& "+ (IF(X32>=1,COUNTBLANK(X" & x & ")*8)+ SUM(X" & x & "))" _
+& "+ (IF(Y32>=1,COUNTBLANK(Y" & x & ")*8)+ SUM(Y" & x & "))" _
+& "+ (IF(Z32>=1,COUNTBLANK(Z" & x & ")*8)+ SUM(Z" & x & "))" _
+& " + (IF(AA32>=1,COUNTBLANK(AA" & x & ")*8)+ SUM(AA" & x & "))" _
+& "+ (IF(AB32>=1,COUNTBLANK(AB" & x & ")*8)+ SUM(AB" & x & "))" _
+& "+ (IF(AC32>=1,COUNTBLANK(AC" & x & ")*8)+ SUM(AC" & x & "))"
+'RANGE IS FROM W-AC
+Range("aX" & x) = "=(IF(AD32>=1,COUNTBLANK(AD" & x & ")*8)+ SUM(AD" & x & "))" _
+& "+ (IF(AE32>=1,COUNTBLANK(AE" & x & ")*8)+ SUM(AE" & x & "))" _
+& "+ (IF(AF32>=1,COUNTBLANK(AF" & x & ")*8)+ SUM(AF" & x & "))" _
+& "+ (IF(AG32>=1,COUNTBLANK(AG" & x & ")*8)+ SUM(AG" & x & "))" _
+& " + (IF(AH32>=1,COUNTBLANK(AH" & x & ")*8)+ SUM(AH" & x & "))" _
+& "+ (IF(AI32>=1,COUNTBLANK(AI" & x & ")*8)+ SUM(AI" & x & "))" _
+& "+ (IF(AJ32>=1,COUNTBLANK(AJ" & x & ")*8)+ SUM(AJ" & x & "))"
+'RANGE IS FROM AD-AJ
+Range("ay" & x) = "=(IF(AK32>=1,COUNTBLANK(AK" & x & ")*8)+ SUM(AK" & x & "))" _
+& "+ (IF(AL32>=1,COUNTBLANK(AL" & x & ")*8)+ SUM(AL" & x & "))" _
+& "+ (IF(AM32>=1,COUNTBLANK(AM" & x & ")*8)+ SUM(AM" & x & "))" _
+& "+ (IF(AN32>=1,COUNTBLANK(AN" & x & ")*8)+ SUM(AN" & x & "))" _
+& "+ (IF(AO32>=1,COUNTBLANK(AO" & x & ")*8)+ SUM(AO" & x & "))" _
+& "+ (IF(AP32>=1,COUNTBLANK(AP" & x & ")*8)+ SUM(AP" & x & "))" _
+& "+ (IF(AQ32>=1,COUNTBLANK(AQ" & x & ")*8)+ SUM(AQ" & x & "))"
+'RANGE IS FROM AK-AQ
+Else
+End If
+Next x
+
+
+For x = 33 To 37 ' this calculates partimer's weeklyovertime
+If Len(Range("a" & x)) > 1 Then 'Like "*" Then
+Range("aT" & x) = "=IF(B32>=1,COUNTIF(B" & x & "," & Chr(34) & "D" & Chr(34) & ")*8+ COUNTIF(B" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(B" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(B" & x & ")>1,left(B" & x & ",1))" _
+& " + IF(c32>=1,COUNTIF(c" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(c" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(c" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(c" & x & ")>1,left(c" & x & ",1))" _
+& " + IF(d32>=1,COUNTIF(d" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(d" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(d" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(d" & x & ")>1,left(d" & x & ",1))" _
+& " + IF(c32>=1,COUNTIF(e" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(e" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(e" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(e" & x & ")>1,left(e" & x & ",1))" _
+& " + IF(f32>=1,COUNTIF(f" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(f" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(f" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(f" & x & ")>1,left(f" & x & ",1))" _
+& " + IF(g32>=1,COUNTIF(g" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(g" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(g" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(g" & x & ")>1,left(g" & x & ",1))" _
+& " + IF(h32>=1,COUNTIF(h" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(h" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(h" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(h" & x & ")>1,left(h" & x & ",1))"
+'RANGE IS FROM B-h
+
+
+Range("aU" & x) = "=IF(i32>=1,COUNTIF(i" & x & "," & Chr(34) & "D" & Chr(34) & ")*8+ COUNTIF(i" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(i" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(i" & x & ")>1,left(i" & x & ",1))" _
+& " + IF(j32>=1,COUNTIF(J" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(j" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(j" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(j" & x & ")>1,left(j" & x & ",1))" _
+& " + IF(k32>=1,COUNTIF(K" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(k" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(k" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(k" & x & ")>1,left(k" & x & ",1))" _
+& " + IF(l32>=1,COUNTIF(L" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(l" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(l" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(l" & x & ")>1,left(l" & x & ",1))" _
+& " + IF(m32>=1,COUNTIF(M" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(m" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(m" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(m" & x & ")>1,left(m" & x & ",1))" _
+& " + IF(n32>=1,COUNTIF(N" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(n" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(n" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(n" & x & ")>1,left(n" & x & ",1))" _
+& " + IF(o32>=1,COUNTIF(O" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(o" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(o" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(o" & x & ")>1,left(o" & x & ",1))"
+'RANGE IS FROM i-O
+
+Range("aV" & x) = "=IF(p32>=1,COUNTIF(p" & x & "," & Chr(34) & "D" & Chr(34) & ")*8+ COUNTIF(p" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(p" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(p" & x & ")>1,left(p" & x & ",1))" _
+& " + IF(q32>=1,COUNTIF(q" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(q" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(q" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(q" & x & ")>1,left(q" & x & ",1))" _
+& " + IF(r32>=1,COUNTIF(r" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(r" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(r" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(r" & x & ")>1,left(r" & x & ",1))" _
+& " + IF(s32>=1,COUNTIF(s" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(s" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(s" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(s" & x & ")>1,left(s" & x & ",1))" _
+& " + IF(t32>=1,COUNTIF(t" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(t" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(t" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(t" & x & ")>1,left(t" & x & ",1))" _
+& " + IF(u32>=1,COUNTIF(u" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(u" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(u" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(u" & x & ")>1,left(u" & x & ",1))" _
+& " + IF(v32>=1,COUNTIF(v" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(v" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(v" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(v" & x & ")>1,left(v" & x & ",1))"
+'RANGE IS FROM p-V
+
+Range("aW" & x) = "=IF(w32>=1,COUNTIF(w" & x & "," & Chr(34) & "D" & Chr(34) & ")*8+ COUNTIF(w" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(w" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(w" & x & ")>1,left(w" & x & ",1))" _
+& " + IF(x32>=1,COUNTIF(x" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(x" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(x" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(x" & x & ")>1,left(x" & x & ",1))" _
+& " + IF(y32>=1,COUNTIF(y" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(y" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(y" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(y" & x & ")>1,left(y" & x & ",1))" _
+& " + IF(z32>=1,COUNTIF(z" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(z" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(z" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(z" & x & ")>1,left(z" & x & ",1))" _
+& " + IF(aa32>=1,COUNTIF(aa" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(aa" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(aa" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(aa" & x & ")>1,left(aa" & x & ",1))" _
+& " + IF(ab32>=1,COUNTIF(ab" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ab" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ab" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ab" & x & ")>1,left(ab" & x & ",1))" _
+& " + IF(ac32>=1,COUNTIF(ac" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ac" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ac" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ac" & x & ")>1,left(ac" & x & ",1))"
+'RANGE IS FROM W-AC
+
+Range("aX" & x) = "=IF(ad32>=1,COUNTIF(ad" & x & "," & Chr(34) & "D" & Chr(34) & ")*8+ COUNTIF(ad" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ad" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ad" & x & ")>1,left(ad" & x & ",1))" _
+& " + IF(ae32>=1,COUNTIF(ae" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ae" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ae" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ae" & x & ")>1,left(ae" & x & ",1))" _
+& " + IF(af32>=1,COUNTIF(af" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(af" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(af" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(af" & x & ")>1,left(af" & x & ",1))" _
+& " + IF(ag32>=1,COUNTIF(ag" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ag" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ag" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ag" & x & ")>1,left(ag" & x & ",1))" _
+& " + IF(ah32>=1,COUNTIF(ah" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ah" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ah" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ah" & x & ")>1,left(ah" & x & ",1))" _
+& " + IF(ai32>=1,COUNTIF(ai" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ai" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ai" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ai" & x & ")>1,left(ai" & x & ",1))" _
+& " + IF(aj32>=1,COUNTIF(aj" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(aj" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(aj" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(aj" & x & ")>1,left(aj" & x & ",1))"
+'RANGE IS FROM AD-AJ
+
+Range("ay" & x) = "=IF(ad32>=1,COUNTIF(ak" & x & "," & Chr(34) & "D" & Chr(34) & ")*8+ COUNTIF(ak" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ak" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ak" & x & ")>1,left(ak" & x & ",1))" _
+& " + IF(al32>=1,COUNTIF(al" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(al" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(al" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(al" & x & ")>1,left(al" & x & ",1))" _
+& " + IF(am32>=1,COUNTIF(am" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(am" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(am" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(am" & x & ")>1,left(am" & x & ",1))" _
+& " + IF(an32>=1,COUNTIF(an" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(an" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(an" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(an" & x & ")>1,left(an" & x & ",1))" _
+& " + IF(ao32>=1,COUNTIF(ap" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ao" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ao" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ao" & x & ")>1,left(ao" & x & ",1))" _
+& " + IF(ap32>=1,COUNTIF(ap" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(ap" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(ap" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(ap" & x & ")>1,left(ap" & x & ",1))" _
+& " + IF(aq32>=1,COUNTIF(aq" & x & "," & Chr(34) & "D" & Chr(34) & ")*8 + COUNTIF(aq" & x & "," & Chr(34) & "S" & Chr(34) & ")*8 + COUNTIF(aq" & x & "," & Chr(34) & "G" & Chr(34) & ")*8) + if(len(aq" & x & ")>1,left(aq" & x & ",1))"
+'RANGE IS FROM AK-AQ
+Else
+End If
+Next x
+
+End Sub
